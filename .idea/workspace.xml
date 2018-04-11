@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="45c38689-8727-435c-9b37-d2f3e7e8fb55" name="Default" comment="" />
+    <list default="true" id="45c38689-8727-435c-9b37-d2f3e7e8fb55" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/default/base/blockui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/default/base/bootstrap-notify.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/default/base/dropdown.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/default/base/scrollable.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/default/base/sweetalert2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/default/base/toastr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/default/base/treeview.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/snippets/pages/common/commonUtil.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/snippets/pages/home/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/snippets/pages/home/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/snippets/pages/role/role_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/snippets/pages/role/role_list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/default/base/scripts.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/default/base/scripts.bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/default/base/style.bundle.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/default/base/style.bundle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/snippets/pages/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/snippets/pages/login/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/login.html" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -13,12 +32,57 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/snippets/pages/home/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-200">
+              <caret line="12" column="59" selection-start-line="12" selection-end-line="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="commonUtil.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/snippets/pages/common/commonUtil.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="6" column="20" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="login.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/snippets/pages/login/login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="139" column="32" lean-forward="true" selection-start-line="139" selection-start-column="32" selection-end-line="139" selection-end-column="32" />
+            <state relative-caret-position="475">
+              <caret line="118" column="51" selection-start-line="118" selection-start-column="51" selection-end-line="118" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="role_list.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/snippets/pages/role/role_list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="69" column="112" selection-start-line="69" selection-start-column="107" selection-end-line="69" selection-end-column="112" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="role_list.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/snippets/pages/role/role_list.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="350">
+              <caret line="14" column="102" selection-start-line="14" selection-start-column="102" selection-end-line="14" selection-end-column="102" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scripts.bundle.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/default/base/scripts.bundle.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -26,8 +90,8 @@
       <file leaf-file-name="vendors.bundle.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/vendors/base/vendors.bundle.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1390290">
-              <caret line="56698" column="37" selection-start-line="56698" selection-start-column="34" selection-end-line="56698" selection-end-column="37" />
+            <state relative-caret-position="1461100">
+              <caret line="56706" column="23" selection-start-line="56706" selection-start-column="23" selection-end-line="56706" selection-end-column="23" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -38,8 +102,8 @@
       <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="90" column="119" selection-start-line="90" selection-start-column="110" selection-end-line="90" selection-end-column="119" />
+            <state relative-caret-position="91">
+              <caret line="145" column="35" lean-forward="true" selection-start-line="145" selection-start-column="35" selection-end-line="145" selection-end-column="35" />
               <folding>
                 <element signature="n#style#0;n#div#4;n#form#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -47,34 +111,62 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.bundle.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.bundle.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/default/base/style.bundle.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="31077" column="8" selection-start-line="31077" selection-start-column="8" selection-end-line="31077" selection-end-column="8" />
+            <state relative-caret-position="254250">
+              <caret line="10170" column="28" selection-start-line="10170" selection-start-column="28" selection-end-line="10170" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="vendors.bundle.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/vendors/base/vendors.bundle.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="104250">
+              <caret line="4170" column="37" selection-start-line="4170" selection-start-column="37" selection-end-line="4170" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>m-login__form</find>
-      <find>40px</find>
-      <find>border-radius: 40px</find>
+      <find />
       <find>.btn.m-btn--pill</find>
       <find>0.85</find>
-      <find>jpg</find>
-      <find>.alert</find>
-      <find>.alert {</find>
-      <find>terms and conditions条款和条件</find>
       <find>m-login__formm_login_signin_submit</find>
       <find>showErrorMsg</find>
       <find>.form-control-feedback</find>
-      <find>Incorrect username or password. Please try again.</find>
       <find>displaySignUpForm</find>
       <find>m_login_signin_submit</find>
+      <find>m_header_topbar</find>
+      <find>user3.jpg</find>
+      <find>m-content</find>
+      <find>jpg</find>
+      <find>.m-menu__item.m-menu__item--active</find>
+      <find>Dashboard</find>
+      <find>.aler</find>
+      <find>.alert</find>
+      <find>40px</find>
+      <find>remote</find>
+      <find>datatable</find>
+      <find>第一页</find>
+      <find>spinner</find>
+      <find>records</find>
+      <find>processing</find>
+      <find>qs</find>
+      <find>alert</find>
+      <find>Spanish Translation</find>
     </findStrings>
     <replaceStrings>
       <replace>1</replace>
@@ -84,12 +176,21 @@
       <dir>D:\WebstormProjects\oauth\assets</dir>
     </dirStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/assets/default/base/webfont.js" />
         <option value="$PROJECT_DIR$/assets/default/base/style.bundle.css" />
+        <option value="$PROJECT_DIR$/assets/snippets/pages/home/index.html" />
+        <option value="$PROJECT_DIR$/assets/snippets/pages/role/role_list.js" />
+        <option value="$PROJECT_DIR$/assets/default/base/scripts.bundle.js" />
+        <option value="$PROJECT_DIR$/assets/snippets/pages/role/role_list.html" />
         <option value="$PROJECT_DIR$/login.html" />
+        <option value="$PROJECT_DIR$/assets/snippets/pages/common/global.util.js" />
+        <option value="$PROJECT_DIR$/assets/snippets/pages/common/commonUtil.js" />
         <option value="$PROJECT_DIR$/assets/snippets/pages/login/login.js" />
       </list>
     </option>
@@ -116,79 +217,94 @@
         <subPane>
           <expand>
             <path>
-              <item name="oauth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oauth" type="462c0819:PsiDirectoryNode" />
+              <item name="user_oauth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="user_oauth" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="oauth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oauth" type="462c0819:PsiDirectoryNode" />
+              <item name="user_oauth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="user_oauth" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="oauth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oauth" type="462c0819:PsiDirectoryNode" />
+              <item name="user_oauth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="user_oauth" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="user_oauth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="user_oauth" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
               <item name="default" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="oauth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oauth" type="462c0819:PsiDirectoryNode" />
+              <item name="user_oauth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="user_oauth" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
               <item name="default" type="462c0819:PsiDirectoryNode" />
               <item name="base" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="oauth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oauth" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="default" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="oauth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oauth" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="default" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="oauth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oauth" type="462c0819:PsiDirectoryNode" />
+              <item name="user_oauth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="user_oauth" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
               <item name="snippets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="oauth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oauth" type="462c0819:PsiDirectoryNode" />
+              <item name="user_oauth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="user_oauth" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
               <item name="snippets" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="oauth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oauth" type="462c0819:PsiDirectoryNode" />
+              <item name="user_oauth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="user_oauth" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="snippets" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="user_oauth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="user_oauth" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="snippets" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="user_oauth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="user_oauth" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
               <item name="snippets" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="login" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="oauth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oauth" type="462c0819:PsiDirectoryNode" />
+              <item name="user_oauth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="user_oauth" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="snippets" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="role" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="user_oauth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="user_oauth" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
               <item name="vendors" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="oauth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oauth" type="462c0819:PsiDirectoryNode" />
+              <item name="user_oauth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="user_oauth" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
               <item name="vendors" type="462c0819:PsiDirectoryNode" />
               <item name="base" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="oauth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oauth" type="462c0819:PsiDirectoryNode" />
+              <item name="user_oauth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="user_oauth" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
               <item name="vendors" type="462c0819:PsiDirectoryNode" />
               <item name="base" type="462c0819:PsiDirectoryNode" />
@@ -201,7 +317,9 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.prettier" value="true" />
     <property name="node.js.path.for.package.prettier" value="project" />
     <property name="node.js.selected.package.prettier" value="" />
@@ -209,6 +327,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\WebstormProjects\user_oauth\assets\default\base" />
+      <recent name="D:\WebstormProjects\user_oauth\assets\snippets\pages\home" />
       <recent name="D:\WebstormProjects\oauth\assets\snippets\pages\login" />
     </key>
   </component>
@@ -224,6 +344,14 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="role_list.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/user_oauth/assets/snippets/pages/role/role_list.html" />
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.role_list.html" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -235,32 +363,35 @@
       <option name="presentableId" value="Default" />
       <updated>1522736271036</updated>
       <workItem from="1522736275876" duration="8790000" />
+      <workItem from="1523256771151" duration="4848000" />
+      <workItem from="1523262063725" duration="4739000" />
+      <workItem from="1523429402868" duration="3649000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8790000" />
+    <option name="totallyTimeSpent" value="22026000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18020834" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.30997878" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.3092455" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,16 +401,133 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/default/base/webfont.js">
+    <entry file="file://$PROJECT_DIR$/assets/snippets/pages/home/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="9" column="70" lean-forward="true" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
+        <state relative-caret-position="300">
+          <caret line="12" column="59" selection-start-line="12" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/snippets/pages/role/role_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5800">
+          <caret line="232" column="42" selection-start-line="232" selection-start-column="42" selection-end-line="232" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/snippets/pages/role/role_list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="14" column="102" selection-start-line="14" selection-start-column="102" selection-end-line="14" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/default/base/scripts.bundle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/vendors/base/vendors.bundle.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1390290">
+        <state relative-caret-position="1423650">
+          <caret line="56706" column="23" selection-start-line="56706" selection-start-column="23" selection-end-line="56706" selection-end-column="23" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="12" column="34" selection-start-line="12" selection-end-line="13" />
+          <folding>
+            <element signature="n#style#0;n#div#4;n#form#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/default/base/style.bundle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254250">
+          <caret line="10170" column="28" selection-start-line="10170" selection-start-column="28" selection-end-line="10170" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/vendors/base/vendors.bundle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104250">
+          <caret line="4170" column="37" selection-start-line="4170" selection-start-column="37" selection-end-line="4170" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/snippets/pages/login/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3475">
+          <caret line="139" column="32" selection-start-line="139" selection-start-column="32" selection-end-line="139" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/default/base/scripts.bundle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/vendors/base/vendors.bundle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1423650">
+          <caret line="56706" column="23" selection-start-line="56706" selection-start-column="23" selection-end-line="56706" selection-end-column="23" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="12" column="34" selection-start-line="12" selection-end-line="13" />
+          <folding>
+            <element signature="n#style#0;n#div#4;n#form#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/default/base/style.bundle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="869375">
+          <caret line="34775" column="17" lean-forward="true" selection-start-line="34775" selection-start-column="17" selection-end-line="34775" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/vendors/base/vendors.bundle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104250">
+          <caret line="4170" column="37" selection-start-line="4170" selection-start-column="37" selection-end-line="4170" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/snippets/pages/home/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27400">
+          <caret line="1096" column="64" selection-start-line="1096" selection-start-column="64" selection-end-line="1096" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/snippets/pages/login/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3475">
+          <caret line="139" column="32" selection-start-line="139" selection-start-column="32" selection-end-line="139" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/vendors/base/vendors.bundle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1423450">
           <caret line="56698" column="37" selection-start-line="56698" selection-start-column="34" selection-end-line="56698" selection-end-column="37" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -287,16 +535,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/vendors/base/vendors.bundle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="4166" column="36" lean-forward="true" selection-start-line="4166" selection-start-column="36" selection-end-line="4166" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
+        <state relative-caret-position="2250">
           <caret line="90" column="119" selection-start-line="90" selection-start-column="110" selection-end-line="90" selection-end-column="119" />
           <folding>
             <element signature="n#style#0;n#div#4;n#form#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -304,17 +545,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/snippets/pages/login/login.js">
+    <entry file="file://$PROJECT_DIR$/assets/default/base/style.bundle.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="139" column="32" lean-forward="true" selection-start-line="139" selection-start-column="32" selection-end-line="139" selection-end-column="32" />
+        <state relative-caret-position="776925">
+          <caret line="31077" column="8" selection-start-line="31077" selection-start-column="8" selection-end-line="31077" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/default/base/webfont.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="9" column="70" lean-forward="true" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/vendors/base/vendors.bundle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104250">
+          <caret line="4170" column="37" selection-start-line="4170" selection-start-column="37" selection-end-line="4170" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/snippets/pages/home/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-200">
+          <caret line="12" column="59" selection-start-line="12" selection-end-line="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/default/base/style.bundle.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="31077" column="8" selection-start-line="31077" selection-start-column="8" selection-end-line="31077" selection-end-column="8" />
+        <state relative-caret-position="254250">
+          <caret line="10170" column="28" selection-start-line="10170" selection-start-column="28" selection-end-line="10170" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/snippets/pages/role/role_list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="14" column="102" selection-start-line="14" selection-start-column="102" selection-end-line="14" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/default/base/scripts.bundle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/vendors/base/vendors.bundle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1461100">
+          <caret line="56706" column="23" selection-start-line="56706" selection-start-column="23" selection-end-line="56706" selection-end-column="23" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="145" column="35" lean-forward="true" selection-start-line="145" selection-start-column="35" selection-end-line="145" selection-end-column="35" />
+          <folding>
+            <element signature="n#style#0;n#div#4;n#form#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/snippets/pages/common/commonUtil.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/snippets/pages/login/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="118" column="51" selection-start-line="118" selection-start-column="51" selection-end-line="118" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/snippets/pages/role/role_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="69" column="112" selection-start-line="69" selection-start-column="107" selection-end-line="69" selection-end-column="112" />
         </state>
       </provider>
     </entry>
