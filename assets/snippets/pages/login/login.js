@@ -1,6 +1,8 @@
 //== Class Definition
 var SnippetLogin = function() {
 
+    var ajaxUrl = "http://127.0.0.1:18081/oauth/v1/api/";
+
     var login = $('#m_login');
 
     // alert
@@ -112,6 +114,10 @@ var SnippetLogin = function() {
 	                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
 	                    showErrorMsg(form, 'danger', '错误的用户名或密码.');
                     }, 2000);
+
+                    setTimeout(function() {
+                       window.location.href="assets/snippets/pages/home/index.html"
+                    }, 5000);
                 }
             });
         });
@@ -171,10 +177,28 @@ var SnippetLogin = function() {
             btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
             form.ajaxSubmit({
-                url: '',
+                url: ajaxUrl+'account',
+                type: 'post',
                 success: function(response, status, xhr, $form) {
-                	// similate 2s delay
-                	setTimeout(function() {
+                    console.log(response);
+                    if(response.status == "0"){
+                        form.clearForm();
+                        form.validate().resetForm();
+
+                        // display signup form
+                        displaySignInForm();
+                        var signInForm = login.find('.m-login__signin form');
+                        signInForm.clearForm();
+                        signInForm.validate().resetForm();
+
+                        showErrorMsg(signInForm, 'success', '谢谢你！注册成功，请登录.');
+                    }else {
+                        showErrorMsg(form, 'danger', '注册账户失败，请稍后再试.');
+                    }
+                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+
+                    // similate 2s delay
+                	/*setTimeout(function() {
 	                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
 	                    form.clearForm();
 	                    form.validate().resetForm();
@@ -186,7 +210,7 @@ var SnippetLogin = function() {
 	                    signInForm.validate().resetForm();
 
 	                    showErrorMsg(signInForm, 'success', '谢谢你！注册成功，请登录.');
-	                }, 2000);
+	                }, 2000);*/
                 }
             });
         });
