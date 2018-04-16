@@ -2119,16 +2119,44 @@ $(document).ready(function() {
 					ajaxParams.method = Plugin.getOption('data.source.read.method') || 'POST';
 
 					var data = Plugin.getDataSourceParam();
+
+                    var ajaxDataParams = {};
 					// remove if server params is not enabled
 					if (!Plugin.getOption('data.serverPaging')) {
 						delete data['pagination'];
-					}
+					}else {
+                       /* ajaxDataParams[p].pageNum = data.pagination.page;
+                        ajaxDataParams[p].pageSize = data.pagination.perpage;*/
+                        ajaxDataParams = {
+                            "p.pageNum" : data.pagination.page,
+                            "p.pageSize" : data.pagination.perpage
+                        }
+                    }
 					if (!Plugin.getOption('data.serverSorting')) {
 						delete data['sort'];
-					}
+					}else {
+                        /*ajaxDataParams = {
+                            "s.field" : data.sort.field,
+                            "s.sort" : data.sort.sort
+                        }*/
+                    }
 					// deprecated in v5.0.7
 					ajaxParams.data['datatable'] = data;
-					ajaxParams.data = $.extend(true, ajaxParams.data, data, Plugin.getOption('data.source.read.params'));
+
+					console.log(ajaxParams.data);
+					console.log(" ====================== ");
+					console.log(data);
+
+
+
+					//ajaxParams.data = $.extend(true, ajaxParams.data, data, Plugin.getOption('data.source.read.params'));
+                    if (ajaxDataParams != null){
+                        //url 参数
+                        ajaxParams.data = $.extend(true, null, ajaxDataParams, Plugin.getOption('data.source.read.params'));
+                    } else {
+                        ajaxParams.data = $.extend(true, ajaxParams.data, data, Plugin.getOption('data.source.read.params'));
+                    }
+
 				}
 
 				return $.ajax(ajaxParams).done(function(response, textStatus, jqXHR) {

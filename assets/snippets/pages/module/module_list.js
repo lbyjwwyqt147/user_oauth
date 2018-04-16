@@ -1,11 +1,11 @@
 //== Class definition
 
-var Role = function () {
+var Module = function () {
     //== Private functions
     var ajaxUrl = "http://127.0.0.1:18081/oauth/v1/api/";
 
-    //角色 grid
-    var roleTable = function () {
+    //资源菜单 grid
+    var moduleTable = function () {
 
         var datatable = $('.m_datatable').mDatatable({
             // datasource definition
@@ -14,7 +14,7 @@ var Role = function () {
                 source: {
                     read: {
                         method:'GET',
-                        url: ajaxUrl+'role',
+                        url: ajaxUrl+'module',
                         params:{
                             roleName: $('#generalSearch').val()
                         }
@@ -52,19 +52,27 @@ var Role = function () {
                 width: 40,
                 selector: {class: 'm-checkbox--solid m-checkbox--brand'}
             }, {
-                field: "roleCode",
-                title: "角色编号",
+                field: "moduleCode",
+                title: "编号",
                 sortable: 'asc', // default sort
                 filterable: false, // disable or enable filtering,
                 width: 150
             }, {
-                field: "roleName",
-                title: "角色名称"
+                field: "moduleName",
+                title: "名称"
             }, {
-                field: "roleDescription",
-                title: "角色描述",
+                field: "menuIcon",
+                title: "图标",
+                width: 150
+            },{
+                field: "URL",
+                title: "menuUrl",
                 width: 150
             }, {
+                field: "authorizedSigns",
+                title: "授权标志",
+                width: 150
+            },{
                 field: "createTime",
                 title: "创建时间",
                 width: 150
@@ -84,28 +92,28 @@ var Role = function () {
         });
     };
 
-    //角色 表单
-    var roleFrom = function () {
+    //资源 表单
+    var moduleFrom = function () {
         $('#m_blockui_4_5').click(function(e) {
 
             e.preventDefault();
             var btn = $(this);
-            var form = $("#role_form_1");
+            var form = $("#module_form_1");
 
             form.validate({
                 rules: {
-                    roleCode: {
+                   /* roleCode: {
                         required: true
-                    },
-                    roleName: {
+                    },*/
+                    moduleName: {
                         required: true
                     }
                 },
                 messages: {
-                    roleCode: {
+                  /*  roleCode: {
                         required: "请输入角色编号."
-                    },
-                    roleName: {
+                    },*/
+                    moduleName: {
                         required: "请输入角色名称."
                     }
                 }
@@ -126,7 +134,7 @@ var Role = function () {
             $(".blockUI.blockMsg.blockElement").css("padding-left","35%");
 
             form.ajaxSubmit({
-                url: ajaxUrl+'role',
+                url: ajaxUrl+'module',
                 type:"post",
                 dataType:"json",
                 //clearForm: true        // 成功提交后，清除所有的表单元素的值.
@@ -158,12 +166,12 @@ var Role = function () {
     return {
         // public functions
         init: function () {
-            roleTable();
-            roleFrom();
+            moduleTable();
+            moduleFrom();
         }
     };
 }();
 
 jQuery(document).ready(function () {
-    Role.init();
+    Module.init();
 });

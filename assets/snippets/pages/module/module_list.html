@@ -187,36 +187,86 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="m-form m-form--fit m-form--label-align-right" id="role_form_1">
+                    <form class="m-form m-form--fit m-form--label-align-right" id="module_form_1">
                         <div class="m-portlet__body">
                             <div class="form-group m-form__group row">
-                                <label for="role-code" class="col-form-label col-lg-3 col-sm-12">
-                                    角色编号:
+                                <label for="module-code" class="col-form-label col-lg-3 col-sm-12">
+                                    资源编号:
                                 </label>
                                 <div class="col-lg-8 col-md-9 col-sm-12">
-                                    <input type="text" class="form-control" id="role-code" name="roleCode" placeholder="角色编号"/>
+                                    <input type="text" class="form-control" id="module-code" name="moduleCode" placeholder="资源编号"/>
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                <label for="role-name" class="col-form-label col-lg-3 col-sm-12">
-                                    角色名称:
+                                <label for="module-name" class="col-form-label col-lg-3 col-sm-12">
+                                    资源名称:
                                 </label>
                                 <div class="col-lg-8 col-md-9 col-sm-12">
-                                    <input class="form-control" id="role-name" name="roleName" placeholder="角色名称"/>
+                                    <input class="form-control" id="module-name" name="moduleName" placeholder="资源名称"/>
                                 </div>
                             </div>
+                            <div class="form-group m-form__group row">
+                                <label for="menu-icon" class="col-form-label col-lg-3 col-sm-12">
+                                    资源名称:
+                                </label>
+                                <div class="col-lg-8 col-md-9 col-sm-12">
+                                    <input class="form-control" id="menu-icon" name="menuIcon" placeholder="资源图标"/>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label for="menu-url" class="col-form-label col-lg-3 col-sm-12">
+                                    资源名称:
+                                </label>
+                                <div class="col-lg-8 col-md-9 col-sm-12">
+                                    <input class="form-control" id="menu-url" name="menuUrl" placeholder="资源URL"/>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label for="authorized-signs" class="col-form-label col-lg-3 col-sm-12">
+                                    资源名称:
+                                </label>
+                                <div class="col-lg-8 col-md-9 col-sm-12">
+                                    <input class="form-control" id="authorized-signs" name="authorizedSigns" placeholder="授权标识"/>
+                                </div>
+                            </div>
+
+
                             <div class="form-group m-form__group row">
                                 <label class="col-form-label col-lg-3 col-sm-12">
                                     角色描述:
                                 </label>
                                 <div class="col-lg-8 col-md-9 col-sm-12">
-                                    <textarea class="form-control m-input" name="roleDescription" placeholder="角色描述"></textarea>
+                                    <textarea class="form-control m-input" name="roleDescription" placeholder="资源描述"></textarea>
                                     <span ></span>
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                <label for="role-name" class="col-form-label col-lg-3 col-sm-12">
-                                    角色状态:
+                                <label class="col-form-label col-lg-3 col-sm-12">
+                                    资源类型:
+                                </label>
+                                <div class="col-lg-8 col-md-9 col-sm-12">
+                                    <div class="m-radio-inline">
+                                        <label class="m-radio">
+                                            <input type="radio" checked value="1" name="moduleType">
+                                            目录
+                                            <span></span>
+                                        </label>
+                                        <label class="m-radio">
+                                            <input type="radio" value="2" name="moduleType">
+                                            菜单
+                                            <span></span>
+                                        </label>
+                                        <label class="m-radio">
+                                            <input type="radio" value="3" name="moduleType">
+                                            按钮
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label  class="col-form-label col-lg-3 col-sm-12">
+                                    资源状态:
                                 </label>
                                 <div class="col-lg-8 col-md-9 col-sm-12">
                                     <div class="m-radio-inline">
@@ -270,7 +320,7 @@
 <script src="../../../default/base/toastr.js" type="text/javascript"></script>
 <!--end::Base Scripts -->
 <!--begin::Page Resources -->
-<script src="role_list.js" type="text/javascript"></script>
+<script src="module_list.js" type="text/javascript"></script>
 <!--end::Page Resources -->
 </body>
 <!-- end::Body -->
