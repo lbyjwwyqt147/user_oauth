@@ -6,17 +6,64 @@ var Module = function () {
 
     var zTreeObj;
     // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-    var setting = {};
-    // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-    var zNodes = [
-        {name:"test1", open:true, children:[
-                {name:"test1_1"}, {name:"test1_2"}]},
-        {name:"test2", open:true, children:[
-                {name:"test2_1"}, {name:"test2_2"}]}
-    ];
+    var setting = {
+        async: {
+            enable: false,
+            type: "get",
+            url: ajaxUrl+"module/tree1",
+            autoParam: ["id"]
+        }
+    };
+
+
+    var moduleTree =  function(){
+        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+        var zNodes = [
+            {name:"test1", open:true, children:[
+                    {name:"test1_1"}, {name:"test1_2"}]},
+            {name:"test2", open:true, children:[
+                    {name:"test2_1"}, {name:"test2_2"}]}
+        ];
+        zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+
+    };
+
+
+    // treeGrid
+    var treeTable = function () {
+        $('#module-tree-grid').treegrid({
+            url:ajaxUrl+"module/tree/grid",
+            method: 'get',
+            lines: true,
+            rownumbers: true,
+            idField:'id',
+            treeField:'moduleName',
+            columns:[[
+                {field:'moduleName',title:'名称'},
+                {field:'moduleCode',title:'编码'},
+                {field:'moduleType',title:'类型'},
+                {field:'menuIcon',title:'图标'},
+                {field:'menuUrl',title:'URL',width:80},
+                {field:'authorizedSigns',title:'授权标识',width:80},
+                {field:'status',title:'状态',width:80},
+                {field:'createTime',title:'创建时间',width:80},
+                {field:'createUserName',title:'创建人',width:80}
+
+            ]]
+        });
+
+      $(".textbox").css("width","100%")
+        $(".combo-arrow").css("height","35px");
+      $("#_easyui_textbox_input1").css({
+          "height":"34.7px",
+          "line-height": "34.7px",
+          "width": "100%"
+      })
+
+    }
+
     //资源菜单 grid
     var moduleTable = function () {
-        zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
         var datatable = $('.m_datatable').mDatatable({
             // datasource definition
             data: {
@@ -24,7 +71,7 @@ var Module = function () {
                 source: {
                     read: {
                         method:'GET',
-                        url: ajaxUrl+'module',
+                        url: ajaxUrl+'role',
                         params:{
                             roleName: $('#generalSearch').val()
                         }
@@ -104,6 +151,15 @@ var Module = function () {
 
     //资源 表单
     var moduleFrom = function () {
+
+        // form 关闭后触发
+        $('#m_blockui_4_5_modal').on('hidden.bs.modal', function () {
+            // 执行一些动作...
+            $(".form-control-feedback").remove();
+            $('#module-pid').combotree('clear');
+            $("#module_form_1")[0].reset();
+        });
+
         $('#m_blockui_4_5').click(function(e) {
 
             e.preventDefault();
@@ -112,19 +168,19 @@ var Module = function () {
 
             form.validate({
                 rules: {
-                   /* roleCode: {
+                    modulePid: {
                         required: true
-                    },*/
+                    },
                     moduleName: {
                         required: true
                     }
                 },
                 messages: {
-                  /*  roleCode: {
-                        required: "请输入角色编号."
-                    },*/
+                    modulePid: {
+                        required: "请选择所属资源."
+                    },
                     moduleName: {
-                        required: "请输入角色名称."
+                        required: "请输入资源名称."
                     }
                 }
             });
@@ -178,6 +234,8 @@ var Module = function () {
         init: function () {
             moduleTable();
             moduleFrom();
+            moduleTree();
+            treeTable();
         }
     };
 }();
