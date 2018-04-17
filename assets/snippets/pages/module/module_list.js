@@ -31,6 +31,7 @@ var Module = function () {
 
     // treeGrid
     var treeTable = function () {
+        // treeGrid
         $('#module-tree-grid').treegrid({
             url:ajaxUrl+"module/tree/grid",
             method: 'get',
@@ -50,6 +51,12 @@ var Module = function () {
                 {field:'createUserName',title:'创建人',width:80}
 
             ]]
+        });
+
+        // combotree
+        $('#module-pid').combotree({
+            url: ajaxUrl+"module/tree/0",
+            method:'GET'
         });
 
       $(".textbox").css("width","100%")
