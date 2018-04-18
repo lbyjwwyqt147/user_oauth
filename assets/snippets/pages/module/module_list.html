@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <title>
-        Metronic | Translation
+        资源菜单
     </title>
     <meta name="description" content="Datatable translations">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,47 +45,7 @@
     <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
 
         <div class="m-grid__item m-grid__item--fluid m-wrapper">
-
             <div class="m-content">
-
-                <div>
-                    <ul id="treeDemo" class="ztree"></ul>
-                </div>
-
-                <div>
-                    <table id="module-tree-grid"></table>
-                </div>
-
-
-
-
-
-
-                <table class="easyui-treegrid" style="width:700px;height:250px"
-                       data-options="
-                url: 'treegrid_data1.json',
-                method: 'get',
-                lines: true,
-                rownumbers: true,
-                idField: 'id',
-                treeField: 'name'
-            ">
-                    <thead>
-                    <tr>
-                        <th data-options="field:'name'" width="220">Name</th>
-                        <th data-options="field:'size'" width="100" align="right">Size</th>
-                        <th data-options="field:'date'" width="150">Modified Date</th>
-                    </tr>
-                    </thead>
-                </table>
-
-
-             <!--   <script id="photo-template" type="text/x-kendo-template">
-                    <div class='employee-photo'
-                         style='background-image: url(#:data.EmployeeID#.jpg);'></div>
-                    <div class='employee-name'>#: FirstName #</div>
-                </script>-->
-
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -182,7 +142,7 @@
                                     <div class="form-group m-form__group row align-items-center">
                                         <div class="col-md-4">
                                             <div class="m-input-icon m-input-icon--left">
-                                                <input type="text" class="form-control m-input" placeholder="输入角色名称搜索..." id="generalSearch">
+                                                <input type="text" class="form-control m-input" placeholder="输入名称搜索..." id="generalSearch">
                                                 <span class="m-input-icon__icon m-input-icon__icon--left">
 															<span>
 																<i class="la la-search"></i>
@@ -207,7 +167,10 @@
                         </div>
                         <!--end: Search Form -->
                         <!--begin: Datatable -->
-                        <div class="m_datatable" id="role_table"></div>
+                         <div>
+                            <table id="module-tree-grid" style="height: 500px"></table>
+                        </div>
+
                         <!--end: Datatable -->
                     </div>
                 </div>

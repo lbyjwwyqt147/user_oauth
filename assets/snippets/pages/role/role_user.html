@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<html lang="en" >
+<!-- begin::Head -->
+<head>
+    <meta charset="utf-8" />
+    <title>
+       角色分配用户
+    </title>
+    <meta name="description" content="Bootstrap popover examples">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--begin::Web font -->
+    <script type="text/javascript" src="../../../default/base/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+    <!--end::Web font -->
+    <!--begin::Base Styles -->
+    <link href="../../../vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="../../../default/base/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Base Styles -->
+    <link rel="shortcut icon" href="../../../default/media/img/logo/favicon.ico" />
+</head>
+<!-- end::Head -->
+<!-- end::Body -->
+<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
+<!-- begin:: Page -->
+<div class="m-grid m-grid--hor m-grid--root m-page">
+
+    <!-- begin::Body -->
+    <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+        <div class="m-grid__item m-grid__item--fluid m-wrapper">
+            <!-- BEGIN: Subheader -->
+            <!-- END: Subheader -->
+            <div class="m-content">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!--begin::Portlet-->
+                        <div class="m-portlet">
+                            <div class="m-portlet__head">
+                                <div class="m-portlet__head-caption">
+                                    <div class="m-portlet__head-title">
+                                        <h3 class="m-portlet__head-text">
+                                            Basic Examples
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-portlet__body">
+                                 <!-- begin: 角色 table -->
+                                <div class="m_datatable" id="role_table_grid"></div>
+                                <!-- end: 角色 table -->
+                            </div>
+                        </div>
+                        <!--end::Portlet-->
+                    </div>
+                    <div class="col-lg-6">
+                        <!--begin::Portlet-->
+                        <div class="m-portlet">
+                            <div class="m-portlet__head">
+                                <div class="m-portlet__head-caption">
+                                    <div class="m-portlet__head-title">
+                                        <h3 class="m-portlet__head-text">
+                                            Advanced Examples
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="" style="vertical-align: middle;text-align: right;padding-top: 15px;">
+                                    <a href="#" class="btn btn-info m-btn m-btn--icon">
+															<span>
+																<i class="fa fa-user-plus"></i>
+																<span>
+																	添加
+																</span>
+															</span>
+                                    </a>
+
+                                    <a href="#" class="btn btn-danger m-btn m-btn--icon">
+															<span>
+																<i class="fa fa-trash-o"></i>
+																<span>
+																	删除
+																</span>
+															</span>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="m-portlet__body">
+                                <!-- begin: 已分配人员 table -->
+                                <div class="m_datatable" id="be-authorized-userGrid"></div>
+                                <!-- end: 已分配 table -->
+                            </div>
+                        </div>
+                        <!--end::Portlet-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--begin::Modal-->
+    <div class="modal fade" id="m_blockui_4_5_roleuser_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        New message
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">
+												&times;
+											</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- begin: 未分配人员 table -->
+                    <div class="m_datatable" id="unauthorized-userGrid"></div>
+                    <!-- end: 未分配 table -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary" id="m_blockui_4_5_roleuser">
+                        保存
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Modal-->
+    <!-- end:: Body -->
+
+</div>
+<!-- end:: Page -->
+
+<!-- begin::Scroll Top -->
+<div class="m-scroll-top m-scroll-top--skin-top" data-toggle="m-scroll-top" data-scroll-offset="500" data-scroll-speed="300">
+    <i class="la la-arrow-up"></i>
+</div>
+<!-- end::Scroll Top -->
+<!-- begin::Quick Nav -->
+<!--begin::Base Scripts -->
+<script src="../../../vendors/base/vendors.bundle.js" type="text/javascript"></script>
+<script src="../../../default/base/scripts.bundle.js" type="text/javascript"></script>
+<!--
+<script src="../../../default/base/blockui.js" type="text/javascript"></script>
+-->
+<script src="../../../default/base/toastr.js" type="text/javascript"></script>
+<!--end::Base Scripts -->
+<!--begin::Page Resources -->
+<script src="role_user.js" type="text/javascript"></script>
+<!--end::Page Resources -->
+</body>
+<!-- end::Body -->
+</html>

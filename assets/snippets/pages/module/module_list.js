@@ -4,31 +4,6 @@ var Module = function () {
     //== Private functions
     var ajaxUrl = "http://127.0.0.1:18081/oauth/v1/api/";
 
-    var zTreeObj;
-    // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-    var setting = {
-        async: {
-            enable: false,
-            type: "get",
-            url: ajaxUrl+"module/tree1",
-            autoParam: ["id"]
-        }
-    };
-
-
-    var moduleTree =  function(){
-        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-        var zNodes = [
-            {name:"test1", open:true, children:[
-                    {name:"test1_1"}, {name:"test1_2"}]},
-            {name:"test2", open:true, children:[
-                    {name:"test2_1"}, {name:"test2_2"}]}
-        ];
-        zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-
-    };
-
-
     // treeGrid
     var treeTable = function () {
         // treeGrid
@@ -40,15 +15,29 @@ var Module = function () {
             idField:'id',
             treeField:'moduleName',
             columns:[[
-                {field:'moduleName',title:'名称'},
-                {field:'moduleCode',title:'编码'},
-                {field:'moduleType',title:'类型'},
-                {field:'menuIcon',title:'图标'},
-                {field:'menuUrl',title:'URL',width:80},
-                {field:'authorizedSigns',title:'授权标识',width:80},
-                {field:'status',title:'状态',width:80},
-                {field:'createTime',title:'创建时间',width:80},
-                {field:'createUserName',title:'创建人',width:80}
+                {field:'moduleName',title:'名称',width:150},
+                {field:'moduleCode',title:'编码',width:120},
+                {field:'moduleType',title:'类型',width:120,formatter: function(value,row,index){
+                        if (value == 1){
+                            return "目录";
+                        } else if (value == 2) {
+                            return "菜单";
+                        }else {
+                            return "按钮"
+                        }
+                    }},
+                {field:'menuIcon',title:'图标',width:200},
+                {field:'menuUrl',title:'URL',width:300},
+                {field:'authorizedSigns',title:'授权标识',width:150},
+                {field:'status',title:'状态',width:100,formatter: function(value,row,index){
+                        if (value == 0){
+                            return "禁用中";
+                        } else {
+                            return "使用中";
+                        }
+                    }},
+                {field:'createTime',title:'创建时间',width:150},
+                {field:'createUserName',title:'创建人',width:120}
 
             ]]
         });
@@ -59,102 +48,16 @@ var Module = function () {
             method:'GET'
         });
 
-      $(".textbox").css("width","100%")
+        $(".textbox").css("width","100%")
         $(".combo-arrow").css("height","35px");
-      $("#_easyui_textbox_input1").css({
-          "height":"34.7px",
-          "line-height": "34.7px",
-          "width": "100%"
-      })
+        $(".validatebox-readonly").css({
+            "height":"34px",
+            "line-height": "34px",
+            "width": "100%"
+        });
 
     }
 
-    //资源菜单 grid
-    var moduleTable = function () {
-        var datatable = $('.m_datatable').mDatatable({
-            // datasource definition
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method:'GET',
-                        url: ajaxUrl+'role',
-                        params:{
-                            roleName: $('#generalSearch').val()
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: true,  //是否后端分页
-                serverFiltering: false,
-                serverSorting: false   //是否后端排序
-            },
-
-            // layout definition
-            layout: {
-                theme: 'default', // datatable theme
-                class: '', // custom wrapper class
-                scroll: false, // enable/disable datatable scroll both horizontal and vertical when needed.
-                height: null, // datatable's body's fixed height
-                footer: false // display/hide footer
-            },
-
-            // column sorting
-            sortable: true,
-
-            pagination: true,
-
-            search: {
-                input: $('#generalSearch')
-            },
-
-            // columns definition
-            columns: [{
-                field: "id",
-                title: "#",
-                sortable: false, // disable sort for this column
-                width: 40,
-                selector: {class: 'm-checkbox--solid m-checkbox--brand'}
-            }, {
-                field: "moduleCode",
-                title: "编号",
-                sortable: 'asc', // default sort
-                filterable: false, // disable or enable filtering,
-                width: 150
-            }, {
-                field: "moduleName",
-                title: "名称"
-            }, {
-                field: "menuIcon",
-                title: "图标",
-                width: 150
-            },{
-                field: "URL",
-                title: "menuUrl",
-                width: 150
-            }, {
-                field: "authorizedSigns",
-                title: "授权标志",
-                width: 150
-            },{
-                field: "createTime",
-                title: "创建时间",
-                width: 150
-            }, {
-                field: "createUserName",
-                title: "创建人"
-            }, {
-                field: "updateTime",
-                title: "更新时间"
-            }, {
-                field: "updateUserName",
-                title: "跟新人"
-            }, {
-                field: "statusText",
-                title: "状态"
-            }]
-        });
-    };
 
     //资源 表单
     var moduleFrom = function () {
@@ -164,7 +67,10 @@ var Module = function () {
             // 执行一些动作...
             $(".form-control-feedback").remove();
             $('#module-pid').combotree('clear');
+            //重置表单
             $("#module_form_1")[0].reset();
+            //刷新 treeGrid
+            $('#module-tree-grid').treegrid('reload');
         });
 
         $('#m_blockui_4_5').click(function(e) {
@@ -219,7 +125,8 @@ var Module = function () {
                     console.log(response);
                     if (response.status == "0") {
                         toastr.success("数据保存成功.");
-
+                        //刷新 comboxTree
+                        $('#module-pid').treegrid('reload');
                     }else {
                         toastr.error("数据保存失败.");
                     }
@@ -239,10 +146,8 @@ var Module = function () {
     return {
         // public functions
         init: function () {
-            moduleTable();
-            moduleFrom();
-            moduleTree();
             treeTable();
+            moduleFrom();
         }
     };
 }();
