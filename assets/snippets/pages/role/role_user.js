@@ -1,13 +1,13 @@
 //== Class definition
 
-var Role = function () {
+var RoleUser = function () {
     //== Private functions
     var ajaxUrl = "http://127.0.0.1:18081/oauth/v1/api/";
 
     //角色 grid
     var roleTable = function () {
 
-         $('#role_table_grid').mDatatable({
+        var roleTableGrid = $('#role_table_grid').mDatatable({
             // datasource definition
             data: {
                 type: 'remote',
@@ -16,7 +16,7 @@ var Role = function () {
                         method:'GET',
                         url: ajaxUrl+'role',
                         params:{
-                            roleName: $('#generalSearch').val()
+                            roleName: ""
                         }
                     }
                 },
@@ -73,7 +73,14 @@ var Role = function () {
                 width: 100
             }]
         });
+
+        $('#role-grid-resh-btn').on('click', function() {
+            roleTableGrid.reload();
+           // $('#role_table_grid').mDatatable('reload');
+        });
     };
+
+
 
     // 已经授权的 user Grid
     var beAuthorizedUserGrid = function () {
@@ -84,9 +91,9 @@ var Role = function () {
                 source: {
                     read: {
                         method:'GET',
-                        url: ajaxUrl+'role',
+                        url: ajaxUrl+'role/user/have',
                         params:{
-                            roleName: $('#generalSearch').val()
+                            roleId: 1
                         }
                     }
                 },
@@ -120,9 +127,8 @@ var Role = function () {
                 title: "#",
                 sortable: false, // disable sort for this column
                 width: 40,
-                // selector: {class: 'm-checkbox--solid m-checkbox--brand'}
-                selector: false,
-                textAlign: 'center'
+                selector: {class: 'm-checkbox--solid m-checkbox--brand'}
+
             }, {
                 field: "userAccount",
                 title: "账户",
@@ -146,9 +152,9 @@ var Role = function () {
                 source: {
                     read: {
                         method:'GET',
-                        url: ajaxUrl+'role',
+                        url: ajaxUrl+'role/user/not',
                         params:{
-                            roleName: $('#generalSearch').val()
+                            roleId:1
                         }
                     }
                 },
@@ -182,9 +188,8 @@ var Role = function () {
                 title: "#",
                 sortable: false, // disable sort for this column
                 width: 40,
-                // selector: {class: 'm-checkbox--solid m-checkbox--brand'}
-                selector: false,
-                textAlign: 'center'
+                selector: {class: 'm-checkbox--solid m-checkbox--brand'}
+
             }, {
                 field: "userAccount",
                 title: "账户",
@@ -197,6 +202,8 @@ var Role = function () {
                 width: 150
             }]
         });
+
+        $(".modal-dialog").css("width","600px");
     }
 
 
@@ -275,11 +282,12 @@ var Role = function () {
         // public functions
         init: function () {
             roleTable();
-           // roleFrom();
+            beAuthorizedUserGrid();
+            unauthorizedUserGrid();
         }
     };
 }();
 
 jQuery(document).ready(function () {
-    Role.init();
+    RoleUser.init();
 });
