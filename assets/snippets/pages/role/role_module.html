@@ -16,7 +16,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <head>
     <meta charset="utf-8" />
     <title>
-       角色分配用户
+       角色分配资源
     </title>
     <meta name="description" content="Bootstrap popover examples">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,6 +35,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--begin::Base Styles -->
     <link href="../../../vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
     <link href="../../../default/base/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="../../../default/base/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css" />
+
     <!--end::Base Styles -->
     <link rel="shortcut icon" href="../../../default/media/img/logo/favicon.ico" />
 </head>
@@ -89,25 +91,25 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="m-portlet__head-caption">
                                     <div class="m-portlet__head-title">
                                         <h3 class="m-portlet__head-text">
-                                            角色已分配人员列表
+                                            资源菜单
                                         </h3>
                                     </div>
                                 </div>
                                 <div class="" style="vertical-align: middle;text-align: right;padding-top: 15px;">
-                                    <a href="#" class="btn btn-info m-btn m-btn--icon" data-toggle="modal" data-target="#m_blockui_4_5_roleuser_modal">
+                                    <a href="#" class="btn btn-info m-btn m-btn--icon"  id="module-tree-save-btn">
 															<span>
-																<i class="fa fa-user-plus"></i>
+																<i class="fa fa-check"></i>
 																<span>
-																	添加
+																	保存
 																</span>
 															</span>
                                     </a>
 
-                                    <a href="#" class="btn btn-danger m-btn m-btn--icon" id="delete-user-btn">
+                                    <a href="#" class="btn btn-info m-btn m-btn--icon" id="module-tree-resh-btn">
 															<span>
-																<i class="fa fa-trash-o"></i>
+																<i class="fa fa-undo"></i>
 																<span>
-																	删除
+																	刷新
 																</span>
 															</span>
                                     </a>
@@ -115,9 +117,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                             </div>
                             <div class="m-portlet__body">
-                                <!-- begin: 已分配人员 table -->
-                                <div class="m_datatable" id="be-authorized-userGrid"></div>
-                                <!-- end: 已分配 table -->
+                                <!-- begin: 资源菜单 tree -->
+                                <ul id="module-tree" class="ztree"></ul>
+                                <!-- end: 资源菜单 tree -->
                             </div>
                         </div>
                         <!--end::Portlet-->
@@ -127,37 +129,6 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
     </div>
 
-    <!--begin::Modal-->
-    <div class="modal fade" id="m_blockui_4_5_roleuser_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        人员列表
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">
-												&times;
-											</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- begin: 未分配人员 table -->
-                    <div class="m_datatable" id="unauthorized-userGrid"></div>
-                    <!-- end: 未分配 table -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="button" class="btn btn-primary" id="m_blockui_4_5_roleuser">
-                        保存
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end::Modal-->
     <!-- end:: Body -->
 
 </div>
@@ -172,13 +143,14 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--begin::Base Scripts -->
 <script src="../../../vendors/base/vendors.bundle.js" type="text/javascript"></script>
 <script src="../../../default/base/scripts.bundle.js" type="text/javascript"></script>
+<script src="../../../default/base/zTree_v3/js/jquery.ztree.core.js" type="text/javascript"></script>
 <!--
 <script src="../../../default/base/blockui.js" type="text/javascript"></script>
 -->
 <script src="../../../default/base/toastr.js" type="text/javascript"></script>
 <!--end::Base Scripts -->
 <!--begin::Page Resources -->
-<script src="role_user.js" type="text/javascript"></script>
+<script src="role_module.js" type="text/javascript"></script>
 <!--end::Page Resources -->
 </body>
 <!-- end::Body -->

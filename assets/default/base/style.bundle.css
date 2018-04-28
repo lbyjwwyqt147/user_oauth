@@ -10560,10 +10560,17 @@ b, strong {
   background: #faf9fc; }
 
 .m-datatable.m-datatable--default > .m-datatable__table > .m-datatable__body .m-datatable__row.m-datatable__row--active > .m-datatable__cell {
-  background: #f7f6fa; }
+  background:#dcfbff;
+    filter:alpha(opacity:80);
+    opacity:0.8;
+    -moz-opacity:0.8;
+    -khtml-opacity: 0.8
+}
 
 .m-datatable.m-datatable--default > .m-datatable__table > .m-datatable__body .m-datatable__row.m-datatable__row--hover:not(.m-datatable__row--active) > .m-datatable__cell {
-  background: #f7f6fa; }
+  background:#efefef;
+    cursor:pointer;
+}
 
 .m-datatable.m-datatable--default.m-datatable--subtable > .m-datatable__table > .m-datatable__body .m-datatable__row.m-datatable__row--subtable-expanded > .m-datatable__cell {
   background: #eeedf4 !important; }

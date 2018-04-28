@@ -2143,17 +2143,29 @@ $(document).ready(function() {
 					// deprecated in v5.0.7
 					ajaxParams.data['datatable'] = data;
 
-					console.log(ajaxParams.data);
 					console.log(" ====================== ");
-					console.log(data);
+					console.log("dataTables 插件自带的向后台发送的请求参数 data : " );
+                    console.log(data);
+                    console.log(" ====================== ");
 
+                    var queryParams = {};
+                    if(data.query != null && typeof data.query == "object" ){
+                        queryParams = data.query;
+                    }
+                    console.log("重构后 向后台发送的请求参数  如下：");
+                    console.log(ajaxDataParams);
+                    console.log(" ====================== ");
 
+                    console.log("自定义查询条件 如下：");
+                    console.log(queryParams);
+                    console.log(" ====================== ");
 
 					//ajaxParams.data = $.extend(true, ajaxParams.data, data, Plugin.getOption('data.source.read.params'));
                     if (ajaxDataParams != null){
-                        //url 参数
-                        ajaxParams.data = $.extend(true, null, ajaxDataParams, Plugin.getOption('data.source.read.params'));
+                        //url 参数   修改为符合自己项目的后台分页查询，主要是把参数重构为后台接收的参数
+                        ajaxParams.data = $.extend(true, null, ajaxDataParams, queryParams);
                     } else {
+                        // 插件默认的 不需要走后台查询
                         ajaxParams.data = $.extend(true, ajaxParams.data, data, Plugin.getOption('data.source.read.params'));
                     }
 
@@ -3423,6 +3435,7 @@ $(document).ready(function() {
 					params.query = params.query || {};
 
 					var search = $(Plugin.getOption('search.input')).val();
+
 					if (typeof search !== 'undefined' && search !== '') {
 						search = search.toLowerCase();
 						datatable.dataSet = $.grep(datatable.dataSet, function(obj) {
