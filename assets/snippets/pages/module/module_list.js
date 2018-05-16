@@ -2,7 +2,7 @@
 
 var Module = function () {
     //== Private functions
-    var ajaxUrl = "http://127.0.0.1:18081/oauth/v1/api/";
+    var ajaxUrl = "http://127.0.0.1:18081/auth/v1/api/";
 
     // treeGrid
     var treeTable = function () {
@@ -28,7 +28,6 @@ var Module = function () {
                     }},
                 {field:'menuIcon',title:'图标',width:200},
                 {field:'menuUrl',title:'URL',width:300},
-                {field:'authorizedSigns',title:'授权标识',width:150},
                 {field:'status',title:'状态',width:100,formatter: function(value,row,index){
                         if (value == 0){
                             return "禁用中";

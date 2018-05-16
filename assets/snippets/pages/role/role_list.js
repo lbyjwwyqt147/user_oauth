@@ -2,7 +2,7 @@
 
 var Role = function () {
     //== Private functions
-    var ajaxUrl = "http://127.0.0.1:18081/oauth/v1/api/";
+    var ajaxUrl = "http://127.0.0.1:18081/auth/v1/api/";
 
     //角色 grid
     var roleTable = function () {
@@ -61,6 +61,10 @@ var Role = function () {
                 field: "roleName",
                 title: "角色名称"
             }, {
+                field: "authorizedSigns",
+                title: "授权标识",
+                width: 150
+            }, {
                 field: "roleDescription",
                 title: "角色描述",
                 width: 150
@@ -99,7 +103,11 @@ var Role = function () {
                     },
                     roleName: {
                         required: true
-                    }
+                    },
+                    authorizedSigns: {
+                        required: true
+                    },
+
                 },
                 messages: {
                     roleCode: {
@@ -107,7 +115,10 @@ var Role = function () {
                     },
                     roleName: {
                         required: "请输入角色名称."
-                    }
+                    },
+                    authorizedSigns: {
+                        required: "请输入授权标识"
+                    },
                 }
             });
 

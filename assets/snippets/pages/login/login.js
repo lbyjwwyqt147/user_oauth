@@ -1,7 +1,7 @@
 //== Class Definition
 var SnippetLogin = function() {
 
-    var ajaxUrl = "http://127.0.0.1:18081/oauth/v1/api/";
+    var ajaxUrl = "http://127.0.0.1:18081/auth/v1/api/";
 
     var login = $('#m_login');
 
@@ -107,17 +107,15 @@ var SnippetLogin = function() {
             btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
             form.ajaxSubmit({
-                url: '',
+                url: ajaxUrl+'login/entry',
                 success: function(response, status, xhr, $form) {
-                	// similate 2s delay
-                	setTimeout(function() {
-	                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
-	                    showErrorMsg(form, 'danger', '错误的用户名或密码.');
-                    }, 2000);
-
-                    setTimeout(function() {
-                       window.location.href="assets/snippets/pages/home/index.html"
-                    }, 5000);
+                    console.log(response);
+                    if(response.status == -1){
+                        btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+                        showErrorMsg(form, 'danger', '错误的用户名或密码.');
+                    }else {
+                        window.location.href="assets/snippets/pages/home/index.html"
+                    }
                 }
             });
         });
@@ -177,7 +175,7 @@ var SnippetLogin = function() {
             btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
             form.ajaxSubmit({
-                url: ajaxUrl+'account',
+                url: ajaxUrl+'login/account',
                 type: 'post',
                 success: function(response, status, xhr, $form) {
                     console.log(response);

@@ -2,7 +2,7 @@
 
 var RoleUser = function () {
     //== Private functions
-    var ajaxUrl = "http://127.0.0.1:18081/oauth/v1/api/";
+    var ajaxUrl = "http://127.0.0.1:18081/auth/v1/api/";
     var beAuthorizedUserGridTable;   //已分配的人员grid
     var  unauthorizedUserGridTable; //未分配人员grid
     var checkboxRoleId = 0; //选中的roleId
