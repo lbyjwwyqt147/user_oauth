@@ -141,11 +141,13 @@ var Role = function () {
                 type:"post",
                 dataType:"json",
                 //clearForm: true        // 成功提交后，清除所有的表单元素的值.
-                resetForm: true ,       // 成功提交后，重置所有的表单元素的值.
+                resetForm: true,       // 成功提交后，重置所有的表单元素的值.
+
                 xhrFields: {　　　　　//　设置cookie
                     withCredentials: true
                 },
                 crossDomain: true,
+
                 //由于某种原因,提交陷入无限等待之中,timeout参数就是用来限制请求的时间,
                 //当请求大于3秒后，跳出请求.
                 //timeout:   3000
