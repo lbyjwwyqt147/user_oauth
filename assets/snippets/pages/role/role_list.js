@@ -142,7 +142,7 @@ var Role = function () {
                 dataType:"json",
                 //clearForm: true        // 成功提交后，清除所有的表单元素的值.
                 resetForm: true ,       // 成功提交后，重置所有的表单元素的值.
-                /*xhrFields: {
+                /*xhrFields: {　　　　　//　设置cookie
                     withCredentials: true
                 },
                 crossDomain: true,*/
