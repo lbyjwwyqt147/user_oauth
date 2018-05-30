@@ -142,6 +142,10 @@ var Role = function () {
                 dataType:"json",
                 //clearForm: true        // 成功提交后，清除所有的表单元素的值.
                 resetForm: true ,       // 成功提交后，重置所有的表单元素的值.
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
                 //由于某种原因,提交陷入无限等待之中,timeout参数就是用来限制请求的时间,
                 //当请求大于3秒后，跳出请求.
                 //timeout:   3000
@@ -155,8 +159,14 @@ var Role = function () {
                     }
                     //移除遮罩层
                     mApp.unblock('#m_blockui_4_5_modal .modal-content');
+                },
+                error:function (response, status, xhr) {
+                    toastr.error("网络出现错误.");
+                    //移除遮罩层
+                    mApp.unblock('#m_blockui_4_5_modal .modal-content');
                 }
             });
+            return false;
 
 
         /*    setTimeout(function() {

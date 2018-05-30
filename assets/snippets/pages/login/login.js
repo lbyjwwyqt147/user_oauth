@@ -107,7 +107,13 @@ var SnippetLogin = function() {
             btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
             form.ajaxSubmit({
+                type: 'post',
                 url: ajaxUrl+'login/entry',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 success: function(response, status, xhr, $form) {
                     console.log(response);
                     if(response.status == -1){
@@ -116,8 +122,13 @@ var SnippetLogin = function() {
                     }else {
                         window.location.href="assets/snippets/pages/home/index.html"
                     }
+                },
+                error:function (response, status, xhr) {
+                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+                    showErrorMsg(form, 'danger', '网络出现错误.');
                 }
             });
+            return false; // 阻止表单自动提交事件，必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
         });
     }
 
@@ -131,6 +142,9 @@ var SnippetLogin = function() {
 
             form.validate({
                 rules: {
+                    userName: {
+                        required: true
+                    },
                     userAccount: {
                         required: true
                     },
@@ -149,8 +163,11 @@ var SnippetLogin = function() {
                     }
                 },
                 messages: {
+                    userName: {
+                        required: "请输入用户名称"
+                    },
                     userAccount: {
-                        required: "请输入注册用户."
+                        required: "请输入注册账号."
                     },
                     userEmail: {
                         required: "请输入电子邮箱.",
@@ -209,8 +226,13 @@ var SnippetLogin = function() {
 
 	                    showErrorMsg(signInForm, 'success', '谢谢你！注册成功，请登录.');
 	                }, 2000);*/
+                },
+                error:function (response, status, xhr) {
+                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+                    showErrorMsg(form, 'danger', '网络出现错误.');
                 }
             });
+            return false;
         });
     }
 
@@ -245,6 +267,7 @@ var SnippetLogin = function() {
 
             form.ajaxSubmit({
                 url: '',
+                type: 'post',
                 success: function(response, status, xhr, $form) { 
                 	// similate 2s delay
                 	setTimeout(function() {
@@ -260,8 +283,13 @@ var SnippetLogin = function() {
 
 	                    showErrorMsg(signInForm, 'success', '密码已发送到您的电子邮件.');
                 	}, 2000);
+                },
+                error:function (response, status, xhr) {
+                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+                    showErrorMsg(form, 'danger', '网络出现错误.');
                 }
             });
+            return false;
         });
     }
 
