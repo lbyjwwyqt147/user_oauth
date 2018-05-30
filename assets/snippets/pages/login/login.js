@@ -109,7 +109,7 @@ var SnippetLogin = function() {
             form.ajaxSubmit({
                 type: 'post',
                 url: ajaxUrl+'login/entry',
-              /*  xhrFields: {
+                /*xhrFields: {
                     withCredentials: true
                 },
                 crossDomain: true,*/

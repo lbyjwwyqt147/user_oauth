@@ -292,6 +292,10 @@ var RoleUser = function () {
                 },
                 type:"post",
                 dataType:"json",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
                 success: function(response, status, xhr) {
                     if (response.status == "0") {
                         toastr.success("删除数据成功.");
@@ -348,6 +352,10 @@ var RoleUser = function () {
                 },
                 type:"post",
                 dataType:"json",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
                 success: function(response, status, xhr) {
                     if (response.status == "0") {
                         toastr.success("数据保存成功.");

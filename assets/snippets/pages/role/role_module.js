@@ -169,8 +169,8 @@ var RoleModule = function () {
                     zTree.expandNode(nodeList[i], true, false, false);
                 }
             }
-        }
     }
+
 
     //保存分配的资源菜单信息
     var saveRoleModule = function () {
@@ -222,6 +222,10 @@ var RoleModule = function () {
                 },
                 type:"post",
                 dataType:"json",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
                 success: function(response, status, xhr) {
                     if (response.status == "0") {
                         toastr.success("数据保存成功.");
