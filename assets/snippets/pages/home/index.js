@@ -2,20 +2,44 @@
 
 var Index = function () {
     //== Private functions
-    var ajaxUrl = "http://127.0.0.1:18081/oauth/v1/api/";
+    //var ajaxUrl = "http://127.0.0.1:18081/oauth/v1/api/";
+    var ajaxUrl = commonUtil.ajaxUrl;
+    var userToken = commonUtil.getUserToken();
+    var homeUser = commonUtil.getUser()
+
+    //初始化用户相关数据
+    var initUserData =  function () {
+         $("#m-card-user__email").text(homeUser.email);
+        $("#m-card-user__name").text(homeUser.userName);
+    };
 
     // 获取资源菜单数据
     var moduleTreeData = function () {
         $.ajax({
-            url:ajaxUrl+"module/user/module/tree",
-           // url:ajaxUrl+"module/tree/0",
+            url:ajaxUrl+"module/user/tree",
+            headers : {'Authorization':userToken},
             type:'get',
             dataType:"json",
-            success:function (data) {
+            success:function (response, status, xhr) {
                 console.log("获取data：" );
-                console.log( data);
+                console.log( response);
+                var serverStatus = response.status;
+                if(serverStatus == -1){
+                   //登陆超时，需要重新登陆系统
+                    toastr.error(response.message);
+                    toastr.info("即将跳转到登陆页面.");
 
-               // initMenu(data);
+                    return;
+                }
+                if (response.status != 0){
+                    toastr.error(response.message);
+                }else {
+                    var data = response.data;
+                    initMenu(data);
+                }
+            },
+            error:function (response, status, xhr) {
+                toastr.error("网络出现错误.");
             }
         })
     };
@@ -24,7 +48,7 @@ var Index = function () {
      * 初始化 资源菜单
      */
     var initMenu = function (data) {
-        var ul = $("#menu-tree");
+        var ul = $("#home_menu_tree_left");
         var li = ""
         $.each(data,function (i,v) {
             console.log("解析数据：");
@@ -37,20 +61,17 @@ var Index = function () {
 
             }
         })
-        ul.html(li);
+        ul.appendChild(li);
 
     };
 
     var initFirstLi = function (data) {
-        var firstli = '<li class="m-menu__item  m-menu__item--active" aria-haspopup="true" >';
-            firstli += ' <a  href="" class="m-menu__link ">';
-            firstli += '<span class="m-menu__item-here"></span>';
-            firstli += ' <i class="m-menu__link-icon '+data.menuIcon+'></i>';
-            firstli += '<span class="m-menu__link-text">';
+        var firstli = '<li class="layui-nav-item">';
+            firstli += ' <a href="javascript:javaScript:void(0);">';
             firstli += data.moduleName;
-            firstli += '</span>';
             firstli +=' </a>';
             firstli +='</li>';
+
             console.log(firstli);
         return firstli;
     }
@@ -104,6 +125,7 @@ var Index = function () {
     return {
         // public functions
         init: function () {
+            initUserData();
             moduleTreeData();
             initLink();
 

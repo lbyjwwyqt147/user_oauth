@@ -4,7 +4,7 @@
  */
 var commonUtil = {
 
-    httpUrl:"http://127.0.0.1:18081/oauth/v1/api/",
+    ajaxUrl:"http://127.0.0.1:18081/auth/v1/api/",
 
 
 
@@ -19,6 +19,23 @@ var commonUtil = {
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
         if(r!=null)return  decodeURIComponent(r[2]); return null;
+    },
+
+    /**
+     * 获取当前用户token
+     */
+    getUserToken:function(){
+        var userToken = JSON.parse(sessionStorage.getItem('user_token'));
+        console.log(userToken);
+        return userToken;
+    },
+
+    /**
+     * 获取用户信息
+     */
+    getUser:function(){
+        var user = JSON.parse(sessionStorage.getItem('user'));
+        return user;
     },
 
     /**

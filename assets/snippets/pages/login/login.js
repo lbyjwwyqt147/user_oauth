@@ -109,16 +109,16 @@ var SnippetLogin = function() {
             form.ajaxSubmit({
                 type: 'post',
                 url: ajaxUrl+'login/entry',
-                /*xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true,*/
                 success: function(response, status, xhr, $form) {
                     console.log(response);
                     if(response.status == -1){
                         btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
                         showErrorMsg(form, 'danger', '错误的用户名或密码.');
                     }else {
+                        //得到登录后的token
+                        var access_token = response.data.access_token;
+                        sessionStorage.setItem('user_token', JSON.stringify(access_token));
+                        sessionStorage.setItem('user',  JSON.stringify(response.data))
                         window.location.href="assets/snippets/pages/home/index.html"
                     }
                 },
@@ -211,20 +211,6 @@ var SnippetLogin = function() {
                     }
                     btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
 
-                    // similate 2s delay
-                	/*setTimeout(function() {
-	                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
-	                    form.clearForm();
-	                    form.validate().resetForm();
-
-	                    // display signup form
-	                    displaySignInForm();
-	                    var signInForm = login.find('.m-login__signin form');
-	                    signInForm.clearForm();
-	                    signInForm.validate().resetForm();
-
-	                    showErrorMsg(signInForm, 'success', '谢谢你！注册成功，请登录.');
-	                }, 2000);*/
                 },
                 error:function (response, status, xhr) {
                     btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);

@@ -3,7 +3,8 @@
 var Module = function () {
     //== Private functions
     var ajaxUrl = "http://127.0.0.1:18081/auth/v1/api/";
-
+    var userToken = JSON.parse(sessionStorage.getItem('user_token'));
+    console.log(userToken);
     // treeGrid
     var treeTable = function () {
         // treeGrid

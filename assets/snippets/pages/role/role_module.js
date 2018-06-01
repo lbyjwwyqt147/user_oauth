@@ -222,10 +222,10 @@ var RoleModule = function () {
                 },
                 type:"post",
                 dataType:"json",
-                xhrFields: {
+              /*  xhrFields: {
                     withCredentials: true
                 },
-                crossDomain: true,
+                crossDomain: true,*/
                 success: function(response, status, xhr) {
                     if (response.status == "0") {
                         toastr.success("数据保存成功.");

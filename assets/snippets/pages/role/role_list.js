@@ -3,7 +3,8 @@
 var Role = function () {
     //== Private functions
     var ajaxUrl = "http://127.0.0.1:18081/auth/v1/api/";
-
+    var userToken = JSON.parse(sessionStorage.getItem('user_token'));
+    console.log(userToken);
     //角色 grid
     var roleTable = function () {
 
@@ -142,11 +143,12 @@ var Role = function () {
                 dataType:"json",
                 //clearForm: true        // 成功提交后，清除所有的表单元素的值.
                 resetForm: true,       // 成功提交后，重置所有的表单元素的值.
-
-                xhrFields: {　　　　　//　设置cookie
+                //添加额外的请求头
+                headers : {'Authorization':userToken},
+           /*     xhrFields: {　　　　　//　设置cookie
                     withCredentials: true
                 },
-                crossDomain: true,
+                crossDomain: true,*/
 
                 //由于某种原因,提交陷入无限等待之中,timeout参数就是用来限制请求的时间,
                 //当请求大于3秒后，跳出请求.
