@@ -111,15 +111,15 @@ var SnippetLogin = function() {
                 url: ajaxUrl+'login/entry',
                 success: function(response, status, xhr, $form) {
                     console.log(response);
-                    if(response.status == -1){
+                    if(response.status != 0){
                         btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
                         showErrorMsg(form, 'danger', '错误的用户名或密码.');
                     }else {
                         //得到登录后的token
                         var access_token = response.data.access_token;
-                        sessionStorage.setItem('user_token', JSON.stringify(access_token));
-                        sessionStorage.setItem('user',  JSON.stringify(response.data))
-                        window.location.href="assets/snippets/pages/home/index.html"
+                        localStorage.setItem('user_token', JSON.stringify(access_token));
+                        localStorage.setItem('user',  JSON.stringify(response.data));
+                        window.location.href="assets/snippets/pages/home/index.html";
                     }
                 },
                 error:function (response, status, xhr) {

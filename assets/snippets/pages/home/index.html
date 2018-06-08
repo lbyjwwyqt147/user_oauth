@@ -33,6 +33,19 @@
 			.layui-nav * {
 				font-size: 15px;
 			}
+			/*.layui-tab-title li {
+				border: solid 2px red;
+				border-bottom-width: 0px
+			}*/
+			.layui-tab-title .layui-this {
+				color: #009688;
+				background-color: honeydew;
+				border-top: solid 3px #009688;
+				border-bottom-width: 0px
+			}
+			.layui-tab-content {
+				 padding: 0px;
+			}
 		</style>
 	</head>
 	<!-- end::Head -->
@@ -429,13 +442,14 @@
 
 					<ul class="layui-nav layui-nav-tree layui-bg-cyan layui-inline" lay-filter="demo" id="home_menu_tree_left">
 						<li data-name="home" class="layui-nav-item layui-nav-itemed layui-this">
-							<a href="javascript:;" lay-tips="主页" lay-direction="2">
+							<a href="javascript:;" lay-href-id="home_table_1" lay-tips="主页" lay-direction="2">
 								<i class="layui-icon layui-icon-home"></i>
 								<cite>主页</cite>
 								<span class="layui-nav-more"></span>
 							</a>
 						</li>
-						<li class="layui-nav-item">
+
+				<!--		<li class="layui-nav-item">
 							<a href="javascript:;">默认展开</a>
 							<dl class="layui-nav-child">
 								<dd><a href="javascript:;">选项一</a></dd>
@@ -453,7 +467,10 @@
 							</dl>
 						</li>
 						<li class="layui-nav-item"><a href="">云市场</a></li>
-						<li class="layui-nav-item"><a href="">社区</a></li>
+						<li class="layui-nav-item"><a href="">社区</a></li>-->
+
+
+
 					</ul>
 
 
@@ -593,15 +610,59 @@
 					</div>-->
 					<!-- END: Aside Menu -->
 				</div>
-				<!-- END: Left Aside -->
-				<div class="m-grid__item m-grid__item--fluid m-wrapper">
 
-					<div class="m-content">
+				<!-- 页面标签 -->
+				<div class="m-grid__item m-grid__item&#45;&#45;fluid m-wrapper">
+
+					<div class="m-content" style="background-color: white;padding: 1px 50px;">
 						<!--Begin::Section-->
 						<div class="row">
 
 
-							<iframe name="mainIframe" id="mainIframe" width="100%"   scrolling="no"  frameborder="0" ></iframe>
+							<!--<div class="layui-tab" lay-filter="demo" lay-allowclose="true">-->
+							<div class="layui-tab" lay-unauto="" lay-allowclose="true" lay-filter="layadmin-layout-tabs">
+								<ul class="layui-tab-title">
+									<li class="layui-this" lay-id="tab_id_home_table_1">主页</li>
+								</ul>
+								<div class="layui-tab-content">
+									<div class="layui-tab-item layui-show">主页内容</div>
+
+								</div>
+							</div>
+
+
+
+<!--
+
+							<div class="layui-tab" lay-filter="demo" lay-allowClose="true">
+								<ul class="layui-tab-title">
+									<li class="layui-this" lay-id="11">网站设置</li>
+									<li lay-id="22">用户管理</li>
+									<li lay-id="33">权限分配</li>
+									<li lay-id="44">商品管理</li>
+									<li lay-id="55">订单管理</li>
+								</ul>
+								<div class="layui-tab-content">
+									<div class="layui-tab-item layui-show">内容1</div>
+									<div class="layui-tab-item">内容2</div>
+									<div class="layui-tab-item">内容3</div>
+									<div class="layui-tab-item">内容4</div>
+									<div class="layui-tab-item">内容5</div>
+								</div>
+							</div>
+
+							<div class="site-demo-button" style="margin-bottom: 0;">
+								<button class="layui-btn site-demo-active" data-type="tabAdd">新增Tab项</button>
+								<button class="layui-btn site-demo-active" data-type="tabDelete">删除：商品管理</button>
+								<button class="layui-btn site-demo-active" data-type="tabChange">切换到：用户管理</button>
+							</div>
+-->
+
+
+
+
+
+							<!--<iframe name="mainIframe" id="mainIframe" width="100%"   scrolling="no"  frameborder="0" ></iframe>-->
 
 
 
@@ -612,7 +673,8 @@
 
 					</div>
 				</div>
-			</div>
+		</div>
+			<!-- 标签页 end -->
 			<!-- end:: Body -->
 <!-- begin::Footer -->
 			<footer class="m-grid__item		m-footer ">
@@ -651,17 +713,6 @@
 		<!--end::Page Vendors -->
         <!--begin::Page Snippets -->
 		<script src="index.js" type="text/javascript"></script>
-		<script>
-            layui.use('element', function(){
-                var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
-
-                //监听导航点击
-                element.on('nav(demo)', function(elem){
-                    //console.log(elem)
-                    layer.msg(elem.text());
-                });
-            });
-		</script>
 		<!--end::Page Snippets -->
 	</body>
 	<!-- end::Body -->

@@ -2,271 +2,318 @@
 
 var RoleUser = function () {
     //== Private functions
-    var ajaxUrl = "http://127.0.0.1:18081/auth/v1/api/";
-    var beAuthorizedUserGridTable;   //已分配的人员grid
-    var  unauthorizedUserGridTable; //未分配人员grid
+    //var ajaxUrl = "http://127.0.0.1:18081/auth/v1/api/";
+    var ajaxUrl = commonUtil.ajaxUrl;
+    var userToken = commonUtil.getUserToken();
     var checkboxRoleId = 0; //选中的roleId
 
 
-    //角色 grid
+    /**
+     *    角色 grid
+     */
     var roleTable = function () {
 
-        var roleTableGrid = $('#role_table_grid').mDatatable({
-            // datasource definition
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method:'GET',
-                        url: ajaxUrl+'role',
-                        params:{
-                            query:{
-                                roleName: ""
-                            }
-                        }
-                    }
+        layui.use('table', function(){
+            var table = layui.table;
+            //渲染table　数据
+            table.render({
+                elem: '#role_table_grid',
+                url:ajaxUrl+"grid/role",
+                headers: {'Authorization': userToken},//接口的请求头
+                request: {
+                    pageName: 'p.pageNum', //页码的参数名称，默认：page
+                    limitName: 'p.pageSize' //每页数据量的参数名，默认：limit
                 },
-                pageSize: 10,
-                serverPaging: true,  //是否后端分页
-                serverFiltering: false,
-                serverSorting: false   //是否后端排序
-            },
+                response: {     //定义后端的json格式
+                    statusName: 'status', //数据状态的字段名称，默认：code
+                    statusCode: 0,//成功的状态码，默认：0
+                    //msgName: 'message', //状态信息的字段名称，默认：msg
+                    countName: 'totalElements', //数据总数的字段名称，默认：count
+                    dataName: 'data' //数据列表的字段名称，默认：data
+                },
+                text: {
+                    none: '暂无相关数据' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
+                },
+                height: 'full-120',
+                cellMinWidth: 80,//全局定义常规单元格的最小宽度
+                cols: [[ //标题栏
+                    {field: 'id', title: 'ID', sort: true},  ////width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度
+                    {field: 'roleCode', title: '角色编号'},
+                    {field: 'roleName', title: '角色名称'},
+                    {field: 'authorizedSigns', title: '授权标识'},
+                    {field: 'roleDescription', title: '角色描述'},
+                    {field: 'statusText', title: '状态',  align: 'center', sort: true}
+                ]],
+                //even: true, //开启隔行背景
+                initSort: {field:'createTime', type:'desc'}, //设置初始排序
+                //skin: 'line', //表格风格
+                page: true, //是否显示分页
+                limits: [10, 20, 30,50],
+                limit: 10, //每页默认显示的数量
+                done: function(response, curr, count){   //数据渲染完的回调
+                    //如果是异步请求数据方式，res即为你接口返回的信息。
+                    //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                    console.log(" =============================== ")
+                    console.log("role_user.js 获取角色grid data")
+                    console.log(response);
+                    console.log(" =============================== ")
+                    toastr.clear();
+                    var serverStatus = response.status;
+                    if(serverStatus == -1){
+                        //登陆超时，需要重新登陆系统
+                        toastr.error(response.message);
+                        toastr.info("即将跳转到登陆页面.");
+                        window.location.href="../../../../login.html";
+                    }else  if (response.status != 0){
+                        toastr.error(response.message);
+                    }
+                    //得到当前页码
+                    // console.log(curr);
+                    //得到数据总量
+                    //  console.log(count);
+                }
+            });
 
-            // layout definition
-            layout: {
-                theme: 'default', // datatable theme
-                class: '', // custom wrapper class
-                scroll: false, // enable/disable datatable scroll both horizontal and vertical when needed.
-                height: null, // datatable's body's fixed height
-                footer: false // display/hide footer
-            },
+            //监听table tr 点击事件
+            var $roleTablelist = $("#role_table_grid").next('.layui-table-view').find('table.layui-table');
 
-            // column sorting
-            sortable: true,
+            $roleTablelist.click(function(event){
+                //移除已经选中行的样式
+                $("table.layui-table .layui_table_tr_click").removeClass("layui_table_tr_click");
+                //alert($(event.target).closest("tr")[0].outerHTML)
+                var tr = $(event.target).closest("tr")[0];
+                checkboxRoleId =　$(tr).children("td:first").find('div').text();
+                //设置点击行样式
+                $(tr).addClass("layui_table_tr_click");
+                console.log(" =============================== ")
+                console.log("role_user.js 选中角色ID ： " + checkboxRoleId);
+                console.log(" =============================== ")
+                //加载已分配table数据
+                table.reload('be-authorized-userGrid', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    },
+                    where:{   //设定异步数据接口的额外参数
+                        roleId:checkboxRoleId
+                    }
+                });
+                //加载未分配table数据
+                table.reload('unauthorized-userGrid', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    },
+                    where:{   //设定异步数据接口的额外参数
+                        roleId:checkboxRoleId
+                    }
+                });
+            });
 
-            pagination: true,
 
-            search: {
-                input: $('#generalSearch')
-            },
+            //刷新角色grid
+            $('#role-grid-resh-btn').on('click', function() {
+                //执行重载
+                table.reload('role_table_grid', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                });
+            });
 
-            // columns definition
-            columns: [{
-                field: "id",
-                title: "#",
-                sortable: false, // disable sort for this column
-                width: 40,
-                selector: {class: 'm-checkbox--solid m-checkbox--brand'},
-                //selector: false,
-                textAlign: 'center'
-            }, {
-                field: "roleCode",
-                title: "角色编号",
-                sortable: 'asc', // default sort
-                filterable: false, // disable or enable filtering,
-                width: 100
-            }, {
-                field: "roleName",
-                title: "角色名称",
-                width: 150
-            }, {
-                field: "roleDescription",
-                title: "角色描述",
-                width: 150
-            },  {
-                field: "statusText",
-                title: "状态",
-                width: 100
-            }]
+            $('#open_user_table').on('click', function() {
+                if(checkboxRoleId == 0){
+                    $(this).removeAttr("data-target");
+                    swal("请选择角色!");
+                    return ;
+                }else {
+                    $(this).attr("data-target","#m_blockui_4_5_roleuser_modal");
+                }
+            });
+
+
+
+
         });
-
-        $('#role-grid-resh-btn').on('click', function() {
-            roleTableGrid.reload();
-           // $('#role_table_grid').mDatatable('reload');
-        });
-
-  /*      $('#role_table_grid tbody tr').on('click',function () {
-            var data = roleTableGrid.row( this ).data();
-            alert( 'You clicked on '+data[0]);
-        } );*/
-
-        //选择框选中事件
-        $('#role_table_grid').on('m-datatable--on-check', function (e, args) {
-            checkboxRoleId = args.toString();
-            console.log("选中roleId = " + checkboxRoleId);
-
-            //加载已分配table数据
-            beAuthorizedUserGridTable.setDataSourceQuery({roleId:checkboxRoleId});
-            beAuthorizedUserGridTable.reload();
-            //加载未分配table数据
-            unauthorizedUserGridTable.setDataSourceQuery({roleId:checkboxRoleId});
-            unauthorizedUserGridTable.reload();
-        });
-
-
     };
 
 
-
-    // 已经授权的 user Grid
+    /**
+     *  已经授权的 user Grid
+     */
     var beAuthorizedUserGrid = function () {
-        beAuthorizedUserGridTable =  $('#be-authorized-userGrid').mDatatable({
-            // datasource definition
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method:'GET',
-                        url: ajaxUrl+'role/user/have',
-                        params:{
-                            query: {
-                                roleId:checkboxRoleId
-                            }
-                        }
-                    }
+
+        layui.use('table', function(){
+            var table = layui.table;
+            //渲染table　数据
+            table.render({
+                elem: '#be-authorized-userGrid',
+                url:ajaxUrl+"grid/role/user/have",
+                where:{   //设定异步数据接口的额外参数
+                    roleId:checkboxRoleId
                 },
-                pageSize: 10,
-                serverPaging: true,  //是否后端分页
-                serverFiltering: false,
-                serverSorting: false   //是否后端排序
-            },
+                headers: {'Authorization': userToken},//接口的请求头
+                request: {
+                    pageName: 'p.pageNum', //页码的参数名称，默认：page
+                    limitName: 'p.pageSize' //每页数据量的参数名，默认：limit
+                },
+                response: {     //定义后端的json格式
+                    statusName: 'status', //数据状态的字段名称，默认：code
+                    statusCode: 0,//成功的状态码，默认：0
+                    //msgName: 'message', //状态信息的字段名称，默认：msg
+                    countName: 'totalElements', //数据总数的字段名称，默认：count
+                    dataName: 'data' //数据列表的字段名称，默认：data
+                },
+                text: {
+                    none: '暂无相关数据' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
+                },
+                height: 'full-120',
+                cellMinWidth: 80,//全局定义常规单元格的最小宽度
+                cols: [[ //标题栏
+                    {type:'checkbox'},
+                    {field: 'id', title: 'ID', sort: true},  ////width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度
+                    {field: 'userName', title: '姓名'},
+                    {field: 'userEmail', title: '邮箱'}
+                ]],
+                //even: true, //开启隔行背景
+                initSort: {field:'createTime', type:'desc'}, //设置初始排序
+                //skin: 'line', //表格风格
+                page: true, //是否显示分页
+                limits: [10, 20, 30,50],
+                limit: 10, //每页默认显示的数量
+                done: function(response, curr, count){   //数据渲染完的回调
+                    //如果是异步请求数据方式，res即为你接口返回的信息。
+                    //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                    console.log(" =============================== ")
+                    console.log("role_user.js 获取角色已经授权的 user Grid grid data")
+                    console.log(response);
+                    console.log(" =============================== ")
+                    var serverStatus = response.status;
+                    toastr.clear();
+                    if(serverStatus == -1){
+                        //登陆超时，需要重新登陆系统
+                        toastr.error(response.message);
+                        toastr.info("即将跳转到登陆页面.");
+                        window.location.href="../../../../login.html";
+                    }else  if (response.status != 0){
+                        toastr.error(response.message);
+                    }
+                    //得到当前页码
+                    // console.log(curr);
+                    //得到数据总量
+                    //  console.log(count);
+                }
+            });
 
-            // layout definition
-            layout: {
-                theme: 'default', // datatable theme
-                class: '', // custom wrapper class
-                scroll: false, // enable/disable datatable scroll both horizontal and vertical when needed.
-                height: null, // datatable's body's fixed height
-                footer: false // display/hide footer
-            },
+            /**
+             * 监听复选框事件
+             */
+            table.on('checkbox(userHaveGrid)', function(obj){
 
-            // column sorting
-            sortable: true,
+            });
 
-            pagination: true,
-
-         /*   search: {
-                input: $("role-id")
-            },
-*/
-
-            // columns definition
-            columns: [
-                {
-                field: "check",
-                title: "#",
-                sortable: false, // disable sort for this column
-                width: 40,
-                selector: {class: 'm-checkbox--solid m-checkbox--brand'}
-
-            },{
-                    field: "id",
-                    title: "id",
-                    sortable: true,
-                    width: 40,
-                    hidden:true
-                }, {
-                field: "userAccount",
-                title: "账户",
-                sortable: 'asc', // default sort
-                filterable: false, // disable or enable filtering,
-                width: 100
-            }, {
-                field: "userEmail",
-                title: "邮箱",
-                width: 150
-            }]
         });
 
     }
 
-    // 未授权的 user Grid
+    /**
+     *  未授权的 user Grid
+     */
     var unauthorizedUserGrid =  function () {
-        unauthorizedUserGridTable = $('#unauthorized-userGrid').mDatatable({
-            // datasource definition
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method:'GET',
-                        url: ajaxUrl+'role/user/not',
-                        params:{
-                            query: {
-                                roleId:checkboxRoleId
-                            }
-                        }
-                    }
+
+        layui.use('table', function(){
+            var table = layui.table;
+            //渲染table　数据
+            table.render({
+                elem: '#unauthorized-userGrid',
+                url:ajaxUrl+"grid/role/user/not",
+                where:{   //设定异步数据接口的额外参数
+                    roleId:checkboxRoleId
                 },
-                pageSize: 10,
-                serverPaging: true,  //是否后端分页
-                serverFiltering: false,
-                serverSorting: false   //是否后端排序
-            },
+                headers: {'Authorization': userToken},//接口的请求头
+                request: {
+                    pageName: 'p.pageNum', //页码的参数名称，默认：page
+                    limitName: 'p.pageSize' //每页数据量的参数名，默认：limit
+                },
+                response: {     //定义后端的json格式
+                    statusName: 'status', //数据状态的字段名称，默认：code
+                    statusCode: 0,//成功的状态码，默认：0
+                    //msgName: 'message', //状态信息的字段名称，默认：msg
+                    countName: 'totalElements', //数据总数的字段名称，默认：count
+                    dataName: 'data' //数据列表的字段名称，默认：data
+                },
+                text: {
+                    none: '暂无相关数据' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
+                },
+                height: 'full-200',
+                cellMinWidth: 80,//全局定义常规单元格的最小宽度
+                cols: [[ //标题栏
+                    {type:'checkbox'},
+                    {field: 'id', title: 'ID', sort: true,width:80},  ////width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度
+                    {field: 'userName', title: '姓名', width: 150},
+                    {field: 'userEmail', title: '邮箱',width:220}
+                ]],
+                //even: true, //开启隔行背景
+                initSort: {field:'createTime', type:'desc'}, //设置初始排序
+                //skin: 'line', //表格风格
+                page: true, //是否显示分页
+                limits: [10, 20, 30,50],
+                limit: 10, //每页默认显示的数量
+                done: function(response, curr, count){   //数据渲染完的回调
+                    //如果是异步请求数据方式，res即为你接口返回的信息。
+                    //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                    console.log(" =============================== ")
+                    console.log("role_user.js 获取角色未授权的 user Grid grid data")
+                    console.log(response);
+                    console.log(" =============================== ")
+                    toastr.clear();
+                    var serverStatus = response.status;
+                    if(serverStatus == -1){
+                        //登陆超时，需要重新登陆系统
+                        toastr.error(response.message);
+                        toastr.info("即将跳转到登陆页面.");
+                        window.location.href="../../../../login.html";
+                    }else  if (response.status != 0){
+                        toastr.error(response.message);
+                    }
+                    //得到当前页码
+                    // console.log(curr);
+                    //得到数据总量
+                    //  console.log(count);
+                }
+            });
 
-            // layout definition
-            layout: {
-                theme: 'default', // datatable theme
-                class: '', // custom wrapper class
-                scroll: false, // enable/disable datatable scroll both horizontal and vertical when needed.
-                height: null, // datatable's body's fixed height
-                footer: false // display/hide footer
-            },
+            /**
+             * 监听复选框事件
+             */
+            table.on('checkbox(userNotHaveGrid)', function(obj){
 
-            // column sorting
-            sortable: true,
+            });
 
-            pagination: true,
 
-            /*search: {
-                input: $('#generalSearch')
-            },*/
-
-            // columns definition
-            columns: [{
-                field: "check",
-                title: "#",
-                sortable: false, // disable sort for this column
-                width: 40,
-                selector: {class: 'm-checkbox--solid m-checkbox--brand'}
-
-            }, {
-                field: "id",
-                title: "id",
-                sortable: true,
-                width: 40,
-                hidden:true
-            },{
-                field: "userAccount",
-                title: "账户",
-                sortable: 'asc', // default sort
-                filterable: false, // disable or enable filtering,
-                width: 100
-            }, {
-                field: "userEmail",
-                title: "邮箱",
-                width: 150
-            }]
         });
 
         $(".modal-dialog").css("width","600px");
+        $(".modal-content").css("width","600px");
 
     }
 
 
-    // 删除角色分配的人员
+    /**
+     *  删除角色分配的人员
+     */
     var  deleteRoleUser = function () {
         $('#delete-user-btn').click(function(e) {
 
             e.preventDefault();
             var btn = $(this);
-
-            // 获取选择行的id
-            beAuthorizedUserGridTable.rows('.m-datatable__row--active');
             var selectDeleteUserIds = [];
-            if (beAuthorizedUserGridTable.nodes().length > 0) {
-                beAuthorizedUserGridTable.columns('id').nodes().each(function(i){
-                    selectDeleteUserIds.push($(this).text());
-                });
+            //获取已授权用户grid 选中数据
+            var layuiTable = layui.table;
+            var checkStatus = layuiTable.checkStatus('be-authorized-userGrid')
+            var dataTable = checkStatus.data;
+            if ( dataTable.length > 0) {
+                $.each(dataTable,function(i,v){
+                    selectDeleteUserIds.push(v.id);
+                })
             }else {
                 swal("请选择要删除的数据!");
                 return;
@@ -284,30 +331,34 @@ var RoleUser = function () {
             $(".blockUI.blockMsg.blockElement").css("padding-left","35%");
 
             $.ajax({
-                url: ajaxUrl+'userRole',
+                url: ajaxUrl+'userRole/del',
                 data : {
                     roleId:checkboxRoleId,
                     userIds:selectDeleteUserIds.toString(),
                     _method: 'DELETE'
                 },
-                type:"post",
+                type:"POST",
                 dataType:"json",
-                xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true,
+                headers: {'Authorization': userToken},
                 success: function(response, status, xhr) {
-                    if (response.status == "0") {
-                        toastr.success("删除数据成功.");
-                        //加载已分配table数据
-                        beAuthorizedUserGridTable.setDataSourceQuery({roleId:checkboxRoleId});
-                        beAuthorizedUserGridTable.reload();
-                        //加载未分配table数据
-                        unauthorizedUserGridTable.setDataSourceQuery({roleId:checkboxRoleId});
-                        unauthorizedUserGridTable.reload();
+                    var serverStatus = response.status;
+                    toastr.clear();
+                    if(serverStatus == -1){
+                        //登陆超时，需要重新登陆系统
+                        toastr.error(response.message);
+                        toastr.info("即将跳转到登陆页面.");
+                        window.location.href="../../../../login.html";
+                    }else  if (response.status != 0){
+                        toastr.error(response.message);
                     }else {
-                        toastr.error("删除数据失败.");
+                        toastr.success("移除分配人员成功.");
+                        reloadUserGrid();
                     }
+                    //移除遮罩层
+                    mApp.unblock('#be-authorized-userGrid');
+                },
+                error:function (response, status, xhr) {
+                    toastr.error("网络出现错误.");
                     //移除遮罩层
                     mApp.unblock('#be-authorized-userGrid');
                 }
@@ -316,20 +367,25 @@ var RoleUser = function () {
         });
     }
 
-    //保存分配的人员信息
+    /**
+     *   保存分配的人员信息
+     */
     var saveRoleUser = function () {
         $('#m_blockui_4_5_roleuser').click(function(e) {
 
             e.preventDefault();
             var btn = $(this);
 
-            // 获取选择行的id
-            unauthorizedUserGridTable.rows('.m-datatable__row--active');
+
             var selectAllocationUserIds = [];
-            if (unauthorizedUserGridTable.nodes().length > 0) {
-                unauthorizedUserGridTable.columns('id').nodes().each(function(i){
-                    selectAllocationUserIds.push($(this).text());
-                });
+            //获取未授权用户grid 选中数据
+            var layuiTable = layui.table;
+            var checkStatus = layuiTable.checkStatus('unauthorized-userGrid')
+            var dataTable = checkStatus.data;
+            if ( dataTable.length > 0) {
+                $.each(dataTable,function(i,v){
+                    selectAllocationUserIds.push(v.id);
+                })
             }else {
                 return;
             }
@@ -345,37 +401,65 @@ var RoleUser = function () {
             $(".blockUI.blockMsg.blockElement").css("padding-left","35%");
 
             $.ajax({
-                url: ajaxUrl+'roleUser',
+                url: ajaxUrl+'roleUser/batch/post',
                 data : {
                     roleId:checkboxRoleId,
                     userIds:selectAllocationUserIds.toString()
                 },
                 type:"post",
                 dataType:"json",
-                /*xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true,*/
+                headers: {'Authorization': userToken},
                 success: function(response, status, xhr) {
-                    if (response.status == "0") {
-                        toastr.success("数据保存成功.");
-                        //加载已分配table数据
-                        beAuthorizedUserGridTable.setDataSourceQuery({roleId:checkboxRoleId});
-                        beAuthorizedUserGridTable.reload();
+                    var serverStatus = response.status;
+                    toastr.clear();
+                    if(serverStatus == -1){
+                        //登陆超时，需要重新登陆系统
+                        toastr.error(response.message);
+                        toastr.info("即将跳转到登陆页面.");
+                        window.location.href="../../../../login.html";
+                    }else  if (response.status != 0){
+                        toastr.error(response.message);
+                    }else {
+                        toastr.success("分配人员成功.");
                         //关闭弹出窗口
                         $('#m_blockui_4_5_roleuser_modal').modal('hide');
-                        //加载未分配table数据
-                        unauthorizedUserGridTable.setDataSourceQuery({roleId:checkboxRoleId});
-                        unauthorizedUserGridTable.reload();
-
-                    }else {
-                        toastr.error("数据保存失败.");
+                        reloadUserGrid();
                     }
+                    //移除遮罩层
+                    mApp.unblock('#m_blockui_4_5_roleuser_modal .modal-content');
+                },
+                error:function (response, status, xhr) {
+                    toastr.error("网络出现错误.");
                     //移除遮罩层
                     mApp.unblock('#m_blockui_4_5_roleuser_modal .modal-content');
                 }
             });
 
+        });
+    }
+
+    /**
+     * 重载用户grid 数据
+     */
+    var reloadUserGrid = function(){
+        var layuiReloadTable = layui.table;
+        //加载已分配table数据
+        layuiReloadTable.reload('be-authorized-userGrid', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            },
+            where:{   //设定异步数据接口的额外参数
+                roleId:checkboxRoleId
+            }
+        });
+        //加载未分配table数据
+        layuiReloadTable.reload('unauthorized-userGrid', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            },
+            where:{   //设定异步数据接口的额外参数
+                roleId:checkboxRoleId
+            }
         });
     }
 
@@ -393,19 +477,4 @@ var RoleUser = function () {
 
 jQuery(document).ready(function () {
     RoleUser.init();
-
-
-    //单击，赋值，改样式
-    $("#role_table_grid > table > tbody > tr").click(function (e) {
-
-        console.log("单击 === ")
-    });
-
-
-
-    //选中行事件
-        $("#role_table_grid tbody").on("click","tr",function(){
-                console.log(" 3333333 ")
-           });
-
 });

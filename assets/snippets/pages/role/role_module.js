@@ -2,108 +2,151 @@
 
 var RoleModule = function () {
     //== Private functions
-    var ajaxUrl = "http://127.0.0.1:18081/auth/v1/api/";
+    //var ajaxUrl = "http://127.0.0.1:18081/auth/v1/api/";
     var checkboxRoleId = 0; //选中的roleId
     var modulezTreeObj;
+    var ajaxUrl = commonUtil.ajaxUrl;
+    var userToken = commonUtil.getUserToken();
 
-
-    //角色 grid
+    /**
+     * 角色 grid
+     */
     var roleTable = function () {
-
-        var roleTableGrid = $('#role_table_grid').mDatatable({
-            // datasource definition
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method:'GET',
-                        url: ajaxUrl+'role',
-                        params:{
-                            query:{
-                                roleName: ""
-                            }
-                        }
-                    }
+        layui.use('table', function(){
+            var table = layui.table;
+            //渲染table　数据
+            table.render({
+                elem: '#role_table_grid',
+                url:ajaxUrl+"grid/role",
+                headers: {'Authorization': userToken},//接口的请求头
+                request: {
+                    pageName: 'p.pageNum', //页码的参数名称，默认：page
+                    limitName: 'p.pageSize' //每页数据量的参数名，默认：limit
                 },
-                pageSize: 10,
-                serverPaging: true,  //是否后端分页
-                serverFiltering: false,
-                serverSorting: false   //是否后端排序
-            },
+                response: {     //定义后端的json格式
+                    statusName: 'status', //数据状态的字段名称，默认：code
+                    statusCode: 0,//成功的状态码，默认：0
+                    //msgName: 'message', //状态信息的字段名称，默认：msg
+                    countName: 'totalElements', //数据总数的字段名称，默认：count
+                    dataName: 'data' //数据列表的字段名称，默认：data
+                },
+                text: {
+                    none: '暂无相关数据' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
+                },
+                height: 'full-230',
+                cellMinWidth: 80,//全局定义常规单元格的最小宽度
+                cols: [[ //标题栏
+                    {field: 'id', title: 'ID', sort: true},  ////width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度
+                    {field: 'roleCode', title: '角色编号'},
+                    {field: 'roleName', title: '角色名称'},
+                    {field: 'authorizedSigns', title: '授权标识'},
+                    {field: 'roleDescription', title: '角色描述'},
+                    {field: 'statusText', title: '状态',  align: 'center', sort: true}
+                ]],
+                //even: true, //开启隔行背景
+                initSort: {field:'createTime', type:'desc'}, //设置初始排序
+                //skin: 'line', //表格风格
+                page: true, //是否显示分页
+                limits: [10, 20, 30,50],
+                limit: 10, //每页默认显示的数量
+                done: function(response, curr, count){   //数据渲染完的回调
+                    //如果是异步请求数据方式，res即为你接口返回的信息。
+                    //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                    console.log(" =============================== ")
+                    console.log("role_module.js 获取角色grid data")
+                    console.log(response);
+                    console.log(" =============================== ")
+                    var serverStatus = response.status;
+                    toastr.clear();
+                    if(serverStatus == -1){
+                        //登陆超时，需要重新登陆系统
+                        toastr.error(response.message);
+                        toastr.info("即将跳转到登陆页面.");
+                        window.location.href="../../../../login.html";
+                    }else  if (response.status != 0){
+                        toastr.error(response.message);
+                    }
+                    //得到当前页码
+                    // console.log(curr);
+                    //得到数据总量
+                    //  console.log(count);
+                }
+            });
 
-            // layout definition
-            layout: {
-                theme: 'default', // datatable theme
-                class: '', // custom wrapper class
-                scroll: false, // enable/disable datatable scroll both horizontal and vertical when needed.
-                height: null, // datatable's body's fixed height
-                footer: false // display/hide footer
-            },
+            //监听table tr 点击事件
+            var $myRolelist = $("#role_table_grid").next('.layui-table-view').find('table.layui-table');
 
-            // column sorting
-            sortable: true,
+            $myRolelist.click(function(event){
+                //移除已经选中行的样式
+                $("table.layui-table .layui_table_tr_click").removeClass("layui_table_tr_click");
+                //alert($(event.target).closest("tr")[0].outerHTML)
+                var tr = $(event.target).closest("tr")[0];
+                checkboxRoleId =　$(tr).children("td:first").find('div').text();
+                //设置点击行样式
+                $(tr).addClass("layui_table_tr_click");
+                console.log(" =============================== ")
+                console.log("role_module.js 选中角色ID ： " + checkboxRoleId);
+                console.log(" =============================== ")
+                moduleTreeData();
+            });
 
-            pagination: true,
 
-            search: {
-                input: $('#generalSearch')
-            },
 
-            // columns definition
-            columns: [{
-                field: "id",
-                title: "#",
-                sortable: false, // disable sort for this column
-                width: 40,
-                selector: {class: 'm-checkbox--solid m-checkbox--brand'},
-                //selector: false,
-                textAlign: 'center'
-            }, {
-                field: "roleCode",
-                title: "角色编号",
-                sortable: 'asc', // default sort
-                filterable: false, // disable or enable filtering,
-                width: 100
-            }, {
-                field: "roleName",
-                title: "角色名称",
-                width: 150
-            }, {
-                field: "roleDescription",
-                title: "角色描述",
-                width: 150
-            },  {
-                field: "statusText",
-                title: "状态",
-                width: 100
-            }]
+            //刷新角色grid
+            $('#role-grid-resh-btn').on('click', function() {
+                //执行重载
+                table.reload('role_table_grid', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                });
+            });
+
         });
-
-        $('#role-grid-resh-btn').on('click', function() {
-            roleTableGrid.reload();
-           // $('#role_table_grid').mDatatable('reload');
-        });
-
-  /*      $('#role_table_grid tbody tr').on('click',function () {
-            var data = roleTableGrid.row( this ).data();
-            alert( 'You clicked on '+data[0]);
-        } );*/
-
-        //选择框选中事件
-        $('#role_table_grid').on('m-datatable--on-check', function (e, args) {
-            checkboxRoleId = args.toString();
-            console.log("选中roleId = " + checkboxRoleId);
-            //刷新树
-            refreshZtree();
-
-        });
-
 
     };
 
 
-    // 资源菜单树
-    var moduleTree =  function () {
+    /**
+     *  资源 data
+     */
+    var moduleTreeData = function(){
+        $.ajax({
+            url:ajaxUrl+"module/tree/role/"+checkboxRoleId,
+            headers : {'Authorization':userToken},
+            type:'get',
+            dataType:"json",
+            success:function (response, status, xhr) {
+                console.log(" =============================== ")
+                console.log("role_module.js 获取 角色资源 data：" );
+                console.log( response);
+                console.log(" =============================== ")
+                var serverStatus = response.status;
+                toastr.clear();
+                if(serverStatus == -1){
+                    //登陆超时，需要重新登陆系统
+                    toastr.error(response.message);
+                    toastr.info("即将跳转到登陆页面.");
+                    window.location.href="../../../../login.html";
+                    return;
+                }
+                if (response.status != 0){
+                    toastr.error(response.message);
+                }else {
+                    moduleTree(JSON.parse(response.data));
+                }
+            },
+            error:function (response, status, xhr) {
+                toastr.error("网络出现错误.");
+            }
+        })
+    }
+
+
+    /**
+     * 资源菜单树组件
+     */
+    var moduleTree =  function (dataNodes) {
         // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
         var setting = {
             data:{
@@ -132,13 +175,6 @@ var RoleModule = function () {
                 chkStyle: "checkbox",   //勾选框类型(checkbox 或 radio）
                 chkboxType: { "Y": "ps", "N": "ps" }   //勾选 checkbox 对于父子节点的关联关系
             },
-            async: {
-                enable: true,
-                type: "get",
-                url: ajaxUrl+"module/role/tree/"+checkboxRoleId,
-                autoParam: ["id"],
-                otherParam: { },
-            },
             callback : {
                 onAsyncSuccess:onAsyncSuccess
             }
@@ -149,8 +185,8 @@ var RoleModule = function () {
             {name:"test2", open:true, children:[
                     {name:"test2_1"}, {name:"test2_2"}]}
         ];
-      //  modulezTreeObj = $.fn.zTree.init($("#module-tree"), setting, zNodes);
-        modulezTreeObj = $.fn.zTree.init($("#module-tree"), setting);
+        modulezTreeObj = $.fn.zTree.init($("#module-tree"), setting, dataNodes);
+       // modulezTreeObj = $.fn.zTree.init($("#module-tree"), setting);
     }
 
     /**
@@ -172,7 +208,9 @@ var RoleModule = function () {
     }
 
 
-    //保存分配的资源菜单信息
+    /**
+     * 保存分配的资源菜单信息
+     */
     var saveRoleModule = function () {
         $('#module-tree-save-btn').click(function(e) {
 
@@ -195,13 +233,9 @@ var RoleModule = function () {
                 swal("请选择要分配的菜单资源!");
                 return;
             }
-
-            console.log(selectModuleIds);
-
-
-
-
-
+            console.log(" =============================== ")
+            console.log("role_module.js 选中的资源id："+ selectModuleIds.toString());
+            console.log(" =============================== ")
 
 
            //添加遮罩层
@@ -215,23 +249,32 @@ var RoleModule = function () {
             $(".blockUI.blockMsg.blockElement").css("padding-left","35%");
 
             $.ajax({
-                url: ajaxUrl+'roleModule',
+                url: ajaxUrl+'roleModule/batch/post',
                 data : {
                     roleId:checkboxRoleId,
                     moduleIds:selectModuleIds.toString()
                 },
                 type:"post",
                 dataType:"json",
-              /*  xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true,*/
+                headers: {'Authorization': userToken},
                 success: function(response, status, xhr) {
-                    if (response.status == "0") {
-                        toastr.success("数据保存成功.");
+                    var serverStatus = response.status;
+                    toastr.clear();
+                    if(serverStatus == -1){
+                        //登陆超时，需要重新登陆系统
+                        toastr.error(response.message);
+                        toastr.info("即将跳转到登陆页面.");
+                        window.location.href="../../../../login.html";
+                    }else  if (response.status != 0){
+                        toastr.error(response.message);
                     }else {
-                        toastr.error("数据保存失败.");
+                        toastr.success("分配资源成功.");
                     }
+                    //移除遮罩层
+                    mApp.unblock('#ztree-content');
+                },
+                error:function (response, status, xhr) {
+                    toastr.error("网络出现错误.");
                     //移除遮罩层
                     mApp.unblock('#ztree-content');
                 }
@@ -252,14 +295,8 @@ var RoleModule = function () {
                 swal("请选择角色数据!");
                 return;
             }
-            refreshZtree();
+            moduleTreeData();
         });
-    }
-
-    var refreshZtree = function(){
-        var zTree = $.fn.zTree.getZTreeObj('module-tree');
-        zTree.setting.async.url = ajaxUrl+"module/role/tree/"+checkboxRoleId;
-        zTree.reAsyncChildNodes(null, "refresh");
     }
 
 
@@ -267,7 +304,7 @@ var RoleModule = function () {
         // public functions
         init: function () {
             roleTable();
-            moduleTree();
+            moduleTreeData();
             saveRoleModule();
             refreshZtreeBtn();
         }

@@ -1915,7 +1915,7 @@
   cursor: default;
 }
 .datagrid-row-selected {
-  background: #0092DC;
+  background: powderblue;
   color: #fff;
 }
 .datagrid-row-editing .textbox,

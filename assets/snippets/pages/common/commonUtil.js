@@ -25,7 +25,7 @@ var commonUtil = {
      * 获取当前用户token
      */
     getUserToken:function(){
-        var userToken = JSON.parse(sessionStorage.getItem('user_token'));
+        var userToken = JSON.parse(localStorage.getItem('user_token'));
         console.log(userToken);
         return userToken;
     },
@@ -34,7 +34,7 @@ var commonUtil = {
      * 获取用户信息
      */
     getUser:function(){
-        var user = JSON.parse(sessionStorage.getItem('user'));
+        var user = JSON.parse(localStorage.getItem('user'));
         return user;
     },
 
@@ -48,6 +48,18 @@ var commonUtil = {
         $("textarea").each(function(){
             $(this).val($.trim($(this).val()))
         });
+    },
+
+    /**
+     * 随机4位数字
+     * @returns {string}
+     */
+    randomNumber:function(){
+        var num = "";
+        for(var i=0;i<6;i++){
+            num+=Math.floor(Math.random()*10)
+        }
+        return num;
     },
 
     /**
