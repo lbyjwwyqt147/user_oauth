@@ -99,7 +99,7 @@ var Role = function () {
             $('#m_blockui_4_5_modal').on('hidden.bs.modal', function () {
                 var layuiTable = layui.table;
                 //刷新 grid
-                layuiTable.reload('role_table_grid', {
+                layuiTable.reload('role_table', {
                     page: {
                         curr: 1 //重新从第 1 页开始
                     }
