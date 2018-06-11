@@ -80,7 +80,7 @@ var Role = function () {
                 var data = obj.data;
                 if(obj.event === 'del'){
                     layer.confirm('真的删除吗?', function(index){
-                        deleteRole(data.id,obj);
+                        deleteRoleEvent(data.id,obj);
                         layer.close(index);
                     });
                 } else if(obj.event === 'edit'){
@@ -95,18 +95,65 @@ var Role = function () {
                 $("#role-code").val(roleCode);
             });
 
+            // form 关闭后触发
+            $('#m_blockui_4_5_modal').on('hidden.bs.modal', function () {
+                var layuiTable = layui.table;
+                //刷新 grid
+                layuiTable.reload('role_table_grid', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                });
+            });
+
         });
     }
 
     /**
      * 删除事件
      */
-    var  deleteRole = function (id,obj) {
-        layer.confirm('真的删除吗?', function(index){
-            deleteRole(data.id,obj);
-            layer.close(index);
+    var  deleteRoleEvent = function (id,obj) {
+        mApp.block('#role_table', {
+            overlayColor: '#000000',
+            type: 'loader',
+            state: 'primary',
+            message: '数据处理中.....'
+
         });
 
+        $.ajax({
+            url: ajaxUrl+'role/del/single',
+            data : {
+                id:id,
+                _method: 'DELETE'
+            },
+            type:"POST",
+            dataType:"json",
+            headers: {'Authorization': userToken},
+            success: function(response, status, xhr) {
+                var serverStatus = response.status;
+                toastr.clear();
+                if(serverStatus == -1){
+                    //登陆超时，需要重新登陆系统
+                    toastr.error(response.message);
+                    toastr.info("即将跳转到登陆页面.");
+                    window.location.href="../../../../login.html";
+                }else  if (response.status != 0){
+                    toastr.error(response.message);
+                }else {
+                    toastr.success("删除角色成功.");
+                    //移除grid 行
+                    obj.del();
+                }
+                //移除遮罩层
+                mApp.unblock('#role_table');
+            },
+            error:function (response, status, xhr) {
+                toastr.error("网络出现错误.");
+                //移除遮罩层
+                mApp.unblock('#role_table');
+            }
+        });
     }
 
     //角色 表单
@@ -177,8 +224,10 @@ var Role = function () {
                         toastr.info("即将跳转到登陆页面.");
                         window.location.href="../../../../login.html";
                     }else  if (response.status != 0){
+                        setRoleCode();
                         toastr.error(response.message);
                     }else {
+                        setRoleCode();
                         toastr.success("保存角色成功.");
                     }
                     //移除遮罩层
@@ -193,6 +242,11 @@ var Role = function () {
             return false;
 
         });
+    }
+    
+    var setRoleCode = function () {
+        var roleCode = commonUtil.randomNumber();
+        $("#role-code").val(roleCode);
     }
 
     return {

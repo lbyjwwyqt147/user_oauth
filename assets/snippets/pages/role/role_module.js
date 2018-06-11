@@ -171,7 +171,7 @@ var RoleModule = function () {
             },
             check : {
                 enable: true,   //true / false 分别表示 显示 / 不显示 复选框或单选框
-                autoCheckTrigger: true,   //true / false 分别表示 触发 / 不触发 事件回调函数
+                //autoCheckTrigger: true,   //true / false 分别表示 触发 / 不触发 事件回调函数
                 chkStyle: "checkbox",   //勾选框类型(checkbox 或 radio）
                 chkboxType: { "Y": "ps", "N": "ps" }   //勾选 checkbox 对于父子节点的关联关系
             },
@@ -224,7 +224,7 @@ var RoleModule = function () {
 
             var selectModuleIds = new Array();
             var ztree = $.fn.zTree.getZTreeObj('module-tree');
-            var nodes = ztree.getChangeCheckedNodes(true);
+            var nodes = ztree.getCheckedNodes(true);
             if (nodes.length != 0) {
                 for (var i = 0; i < nodes.length; i++) {
                     selectModuleIds.push(nodes[i].id);
@@ -236,6 +236,7 @@ var RoleModule = function () {
             console.log(" =============================== ")
             console.log("role_module.js 选中的资源id："+ selectModuleIds.toString());
             console.log(" =============================== ")
+
 
 
            //添加遮罩层
@@ -279,6 +280,7 @@ var RoleModule = function () {
                     mApp.unblock('#ztree-content');
                 }
             });
+
 
         });
     };

@@ -207,9 +207,6 @@ var Index = function () {
                     //切换到指定Tab项
                     element.tabChange('layadmin-layout-tabs',tab_id);
                 }
-                console.log(menu_url);
-
-                layer.msg(elem.text());
             });
 
 

@@ -208,8 +208,8 @@ var Module = function () {
 
         // 新增窗口show 后触发
         $('#m_blockui_4_5_modal').on('show.bs.modal', function () {
-            var roleCode = commonUtil.randomNumber();
-            $("#module-code").val(roleCode);
+            var moduleCode = commonUtil.randomNumber();
+            $("#module-code").val(moduleCode);
         });
 
         // form 关闭后触发
@@ -281,12 +281,14 @@ var Module = function () {
                         toastr.info("即将跳转到登陆页面.");
                         window.location.href="../../../../login.html";
                     }else  if (response.status != 0){
+                        setModuleCode();
                         toastr.error(response.message);
                     }else {
                         toastr.success("保存资源成功.");
                         //刷新 comboxTree
                         $('#module-pid').combotree('clear');
                         combotreeData();
+                        setModuleCode();
                     }
 
                     //移除遮罩层
@@ -294,12 +296,18 @@ var Module = function () {
                 },
                 error:function (response, status, xhr) {
                     toastr.error("网络出现错误.");
+
                     //移除遮罩层
                     mApp.unblock('#m_blockui_4_5_modal .modal-content');
                 }
             });
 
         });
+    }
+
+    var setModuleCode = function(){
+        var moduleCode = commonUtil.randomNumber();
+        $("#module-code").val(moduleCode);
     }
 
     return {
