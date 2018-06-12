@@ -173,7 +173,7 @@ var RoleModule = function () {
                 enable: true,   //true / false 分别表示 显示 / 不显示 复选框或单选框
                 //autoCheckTrigger: true,   //true / false 分别表示 触发 / 不触发 事件回调函数
                 chkStyle: "checkbox",   //勾选框类型(checkbox 或 radio）
-                chkboxType: { "Y": "ps", "N": "ps" }   //勾选 checkbox 对于父子节点的关联关系
+                chkboxType: { "Y": "p", "N": "ps" }   //勾选 checkbox 对于父子节点的关联关系
             },
             callback : {
                 onAsyncSuccess:onAsyncSuccess
