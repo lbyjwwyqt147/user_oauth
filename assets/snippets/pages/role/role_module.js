@@ -163,7 +163,7 @@ var RoleModule = function () {
             },
             showLine: true,
             view : {
-                showIcon : false,
+                showIcon : true,
                 selectedMulti : true,     //可以多选
                 showLine : false,
                 expandSpeed : 'fast',
